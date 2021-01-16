@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Gramium.Data.Common.Repositories;
 using Gramium.Data.Models;
 using Gramium.Services.Data;
+using Gramium.Web.ViewModels.Settings;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gramium.Api.Controllers
@@ -18,10 +20,18 @@ namespace Gramium.Api.Controllers
             this.sittingRepo = sittingRepo;
         }
 
-        [HttpGet]
-        public ActionResult<int> GetAll()
+        [HttpGet("Count")]
+        public ActionResult<int> GetCount()
         {
             return Ok(this.settingsService.GetCount());
+        }
+
+        [HttpGet("GetAll")]
+        public ActionResult<IEnumerable<SettingViewModel>> GetAll()
+        {
+            this.HttpContext.Response.Headers.Add("TRASHY-HEADER", "VALUE");
+            
+            return Ok(this.settingsService.GetAll<SettingViewModel>());
         }
 
         [HttpPost]

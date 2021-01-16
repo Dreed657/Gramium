@@ -13,14 +13,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.312" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Gramium.Data.Common\Gramium.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Gramium.Data.Models\Gramium.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\Gramium.Web.ViewModels\Gramium.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Gramium.Services.Mapping\Gramium.Services.Mapping.csproj" />
   </ItemGroup>
 
