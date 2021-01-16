@@ -27,8 +27,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Web\Gramium.Web\Gramium.Web.csproj" />
-  </ItemGroup>
-
 </Project>
