@@ -31,6 +31,8 @@ using Gramium.Api.Common;
 using AutoMapper;
 using Gramium.Services.Data.Posts;
 using AutoMapper.Configuration;
+using Gramium.Services.Data.Authentication.CurrentUser;
+using Gramium.Web.Infrastructure.Filters;
 
 namespace Gramium.Api
 {
@@ -75,7 +77,10 @@ namespace Gramium.Api
                     };
                 });
 
-            services.AddControllers();
+            services.AddControllers(options => 
+                        options.Filters.Add<ModelOrNotFoundActionFilter>()
+                    );
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gramium.Api", Version = "v1" });
@@ -93,8 +98,11 @@ namespace Gramium.Api
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IPostsService, PostsService>();
+
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,6 +131,11 @@ namespace Gramium.Api
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors(options => options
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
 
             app.UseEndpoints(endpoints =>
             {

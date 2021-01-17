@@ -6,6 +6,8 @@
 
     public class PostViewModel : IMapFrom<Post>
     {
+        public int Id { get; set; }
+
         public string Content { get; set; }
 
         public ShortUserViewModel Creator { get; set; }

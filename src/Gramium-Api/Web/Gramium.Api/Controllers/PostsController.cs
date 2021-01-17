@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using Gramium.Services.Data.Authentication.CurrentUser;
 
 namespace Gramium.Api.Controllers
 {
@@ -11,10 +12,12 @@ namespace Gramium.Api.Controllers
     public class PostsController : ApiController
     {
         private readonly IPostsService postsService;
+        private readonly ICurrentUserService currentUser;
 
-        public PostsController(IPostsService postsService)
+        public PostsController(IPostsService postsService, ICurrentUserService currentUser)
         {
             this.postsService = postsService;
+            this.currentUser = currentUser;
         }
 
         [HttpGet("{id}")]
@@ -59,7 +62,8 @@ namespace Gramium.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PostInputModel model)
         {
-            var result = await this.postsService.CreateAsync<PostViewModel>(model);
+            var userId = this.currentUser.GetId();
+            var result = await this.postsService.CreateAsync<PostViewModel>(model, userId);
 
             if (result == null)
             {
