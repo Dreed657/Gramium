@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper.Configuration;
+using Gramium.Api.Common;
 using Gramium.Data.Models;
 using Gramium.Services.Authentication;
 using Gramium.Web.ViewModels.Auth;
@@ -13,27 +14,30 @@ namespace Gramium.Api.Controllers
     public class AuthController : ApiController
     {
         private readonly IAuthService authService;
+        private readonly IApiConfig apiConfig;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IApiConfig apiConfig)
         {
             this.authService = authService;
+            this.apiConfig = apiConfig;
         }
 
         // TODO: REMOVE HARD CODED SECRET
         [AllowAnonymous]
         [HttpPost("Login")]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(200, Type = typeof(LoginResponseModel))]
         public async Task<IActionResult> Login([FromBody] UserLoginModel model)
         {
-            IActionResult response = Unauthorized();
-            var validToken = await this.authService.AuthenticateUserAsync(model, "gjqqxpe5udpcc8g4");
+            var validToken = await this.authService.AuthenticateUserAsync(model, this.apiConfig.JwtSecret);
 
             if (!string.IsNullOrEmpty(validToken))
             {
                 this.HttpContext.Response.Cookies.Append("auth", validToken);
-                response = Ok(new { token = validToken });
+                return Ok(new LoginResponseModel(validToken));
             }
 
-            return response;
+            return Unauthorized();
         }
 
         [AllowAnonymous]

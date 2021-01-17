@@ -16,7 +16,12 @@ namespace Gramium.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+
+            this.Posts = new HashSet<Post>();
         }
+
+        // Custom fields
+        public ICollection<Post> Posts { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

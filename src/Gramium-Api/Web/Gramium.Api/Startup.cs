@@ -27,17 +27,23 @@ using Gramium.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Gramium.Api.Common;
+using AutoMapper;
+using Gramium.Services.Data.Posts;
+using AutoMapper.Configuration;
 
 namespace Gramium.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        private IConfiguration Configuration { get; }
+        private Microsoft.Extensions.Configuration.IConfiguration Configuration { get; }
+
+        private MapperConfigurationExpression MapperConfig { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -75,6 +81,10 @@ namespace Gramium.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gramium.Api", Version = "v1" });
             });
 
+            services.AddSingleton<IMapper>(x => new Mapper(new MapperConfiguration(this.MapperConfig)));
+            services.AddTransient<Microsoft.Extensions.Configuration.IConfiguration>(_ => this.Configuration);
+            services.AddTransient<IApiConfig, ApiConfig>();
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -84,12 +94,13 @@ namespace Gramium.Api
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IPostsService, PostsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            this.MapperConfig = AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
