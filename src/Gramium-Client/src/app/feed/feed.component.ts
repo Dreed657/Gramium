@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IPost } from '../shared/Interfaces/IPost';
+import { PostsService } from '../shared/posts.service';
 
 @Component({
   selector: 'app-feed',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feed.component.scss']
 })
 export class FeedComponent implements OnInit {
+  posts: IPost[];
 
-  constructor() { }
+  constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
+    this.posts = this.postsService.getAllPosts();
   }
 
 }
