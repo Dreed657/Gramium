@@ -1,0 +1,14 @@
+div.login {
+    width: 400px;
+    border: 1px solid lightblue;
+    border-radius: 10px;
+    padding: 25px;
+    a.register-link {
+        text-decoration: none;
+        color: black;
+    }
+    a.register-link:hover {
+        text-decoration: underline;
+        color: lightblue;
+    }
+}

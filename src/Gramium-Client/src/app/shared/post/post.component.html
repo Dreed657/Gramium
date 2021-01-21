@@ -1,17 +1,17 @@
-<div class="post-container">
-    <div class="post-name-wrapper">
-    <div class="post-name">
-        <div class="columns">
-        <div>
-            <p>Date: <time>{{post.CreatedOn}}</time></p>
-            <div class="nick-name">
-            <p>Username: <span>{{post.Content}}</span></p>
-            </div>
-        </div>
-        <div class="subscribers">
-            <p>Subscribers: <span>{{post.UserName}}</span></p>
-        </div>
-        </div>
+<div class="post my-5 mx-5">
+    <div class="post-header">
+        <fa-icon [icon]="profileIcon"></fa-icon>
+        <p><span>{{post.UserName}}</span></p>
     </div>
+    <div class="post-content">
+        <img [src]=post.Content alt="">
+    </div>
+    <div class="post-actions">
+        <fa-icon [icon]="likeIcon"></fa-icon>
+        <fa-icon [icon]="commentIcon"></fa-icon>
+        <fa-icon [icon]="sendIcon"></fa-icon>
+    </div>
+    <div class="post-comments">
+        <p>Date: <time>{{post.CreatedOn}}</time></p>
     </div>
 </div>

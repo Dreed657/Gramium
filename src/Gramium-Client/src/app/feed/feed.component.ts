@@ -9,11 +9,15 @@ import { PostsService } from '../shared/posts.service';
 })
 export class FeedComponent implements OnInit {
   posts: IPost[];
+  isLoading = true;
 
   constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
     this.posts = this.postsService.getAllPosts();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2500);
   }
 
 }

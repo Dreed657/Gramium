@@ -1,2 +1,13 @@
-<app-loader></app-loader>
-<app-post *ngFor="let post of posts" [post]="post"></app-post>
+<div class="container">
+    <app-header></app-header>
+
+    <div class="row">
+        <div class="col-8">
+            <app-loader [isLoading]=isLoading></app-loader>
+            <app-post *ngFor="let post of posts" [post]="post"></app-post>
+        </div>
+        <div class="col-4">
+            <app-sidebar></app-sidebar>
+        </div>
+    </div>
+</div>
