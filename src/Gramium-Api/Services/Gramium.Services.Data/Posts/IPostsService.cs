@@ -8,7 +8,7 @@
 
     public interface IPostsService
     {
-        Task<T> CreateAsync<T>(PostInputModel model);
+        Task<T> CreateAsync<T>(PostInputModel model, string userId);
 
         Task<bool> UpdateAsync(PostInputModel model, int id);
 

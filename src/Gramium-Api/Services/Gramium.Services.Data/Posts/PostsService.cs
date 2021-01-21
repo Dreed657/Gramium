@@ -22,11 +22,12 @@
             this.mapper = mapper;
         }
 
-        public async Task<T> CreateAsync<T>(PostInputModel model)
+        public async Task<T> CreateAsync<T>(PostInputModel model, string userId)
         {
             var post = new Post()
             {
                 Content = model.Content,
+                CreatorId = userId,
             };
 
             await this.postRepo.AddAsync(post);
