@@ -45,7 +45,6 @@
             var user = new ApplicationUser()
             {
                 Email = model.Email,
-                UserName = model.UserName,
             };
 
             // TODO: Add Validations

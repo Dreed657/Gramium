@@ -22,7 +22,6 @@ namespace Gramium.Api.Controllers
             this.apiConfig = apiConfig;
         }
 
-        // TODO: REMOVE HARD CODED SECRET
         [AllowAnonymous]
         [HttpPost("Login")]
         [ProducesResponseType(401)]
@@ -33,7 +32,7 @@ namespace Gramium.Api.Controllers
 
             if (!string.IsNullOrEmpty(validToken))
             {
-                this.HttpContext.Response.Cookies.Append("auth", validToken);
+                //this.HttpContext.Response.Cookies.Append("auth", validToken);
                 return Ok(new LoginResponseModel(validToken));
             }
 
