@@ -1,5 +1,5 @@
 <div class="register my-5 mx-auto">
-    <form [formGroup]=registerFrom>
+    <form [formGroup]=registerFrom (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="username">Username</label>
           <input formControlName="username" type="text" class="form-control" id="username" aria-describedby="username" placeholder="Username">
@@ -13,7 +13,7 @@
           <label for="password">Password</label>
           <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!registerFrom.valid">Login</button>
     </form>
     <a [routerLink]="['/login']" class="register-link my-2 text-center">Already have an account?</a>
 </div>

@@ -21,4 +21,19 @@ export class AuthService {
   register(data: IRegisterModel): Observable<any> {
     return this.http.post(`${API_KEY}/api/auth/register`, data);
   }
+
+  saveToken(token): void {
+    localStorage.setItem('token', token);
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  isAuthenticated(): boolean {
+      if (this.getToken()) {
+        return true;
+      }
+      return false;
+  }
 }

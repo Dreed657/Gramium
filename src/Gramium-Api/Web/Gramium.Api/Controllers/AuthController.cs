@@ -25,9 +25,15 @@ namespace Gramium.Api.Controllers
         [AllowAnonymous]
         [HttpPost("Login")]
         [ProducesResponseType(401)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(200, Type = typeof(LoginResponseModel))]
         public async Task<IActionResult> Login([FromBody] UserLoginModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.ValidationProblem(this.ModelState);
+            }
+            
             var validToken = await this.authService.AuthenticateUserAsync(model, this.apiConfig.JwtSecret);
 
             if (!string.IsNullOrEmpty(validToken))
@@ -43,6 +49,11 @@ namespace Gramium.Api.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.ValidationProblem(this.ModelState);
+            }
+
             var result = await this.authService.RegisterUser(model);
             if (!result)
             {

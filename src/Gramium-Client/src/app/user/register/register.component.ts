@@ -1,3 +1,4 @@
+import { AuthService } from './../../core/auth.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -14,9 +15,16 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    this.authService.login(this.registerFrom.value).subscribe(data => {
+      console.log(data);
+      // this.authService.saveToken(data.token);
+    });
   }
 
 }

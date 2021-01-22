@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     canActivate: [AuthGuard],
     component: FeedComponent
   },

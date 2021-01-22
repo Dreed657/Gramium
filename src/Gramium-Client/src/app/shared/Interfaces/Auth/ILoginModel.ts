@@ -1,4 +1,4 @@
 export interface ILoginModel {
-    email: string;
+    username: string;
     password: string;
 }
