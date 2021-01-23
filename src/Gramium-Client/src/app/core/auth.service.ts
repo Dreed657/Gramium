@@ -4,30 +4,36 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IRegisterModel } from '../shared/Interfaces/Auth/IRegisterModel';
+import { Router } from '@angular/router';
 
-const API_KEY = environment.ApiUrl;
+const tokenKey = 'token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(data: ILoginModel): Observable<any> {
-    return this.http.post(`${API_KEY}/api/auth/login`, data);
+    return this.http.post('/api/auth/login', data);
   }
 
   register(data: IRegisterModel): Observable<any> {
-    return this.http.post(`${API_KEY}/api/auth/register`, data);
+    return this.http.post('/api/auth/register', data);
+  }
+
+  logout(): void {
+    localStorage.removeItem(tokenKey);
+    this.router.navigate(['/login']);
   }
 
   saveToken(token): void {
-    localStorage.setItem('token', token);
+    localStorage.setItem(tokenKey, token);
   }
 
   getToken(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem(tokenKey);
   }
 
   isAuthenticated(): boolean {

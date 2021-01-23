@@ -45,9 +45,15 @@
             var user = new ApplicationUser()
             {
                 Email = model.Email,
+                UserName = model.UserName,
             };
 
-            // TODO: Add Validations
+            // TODO: SHOULD RETURN ARRAY OF VALIDATION ERRORS
+            if (model.Password != model.RePassword)
+            {
+                return false;
+            }
+
             var result = await this.userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {

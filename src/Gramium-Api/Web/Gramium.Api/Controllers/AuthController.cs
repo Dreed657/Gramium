@@ -31,7 +31,7 @@ namespace Gramium.Api.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return this.ValidationProblem(this.ModelState);
+                return this.BadRequest(this.ModelState);
             }
             
             var validToken = await this.authService.AuthenticateUserAsync(model, this.apiConfig.JwtSecret);
@@ -51,7 +51,7 @@ namespace Gramium.Api.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return this.ValidationProblem(this.ModelState);
+                return this.BadRequest(this.ModelState);
             }
 
             var result = await this.authService.RegisterUser(model);

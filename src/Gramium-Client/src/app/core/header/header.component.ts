@@ -1,5 +1,6 @@
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
-import { faHome, faPaperPlane, faCompass, faHeart, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPaperPlane, faCompass, faHeart, faCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,15 @@ export class HeaderComponent implements OnInit {
   discoverIcon = faCompass;
   likesIcon = faHeart;
   profileIcon = faCircle;
+  logoutIcon = faSignOutAlt;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
 }
