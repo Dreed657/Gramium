@@ -4,7 +4,10 @@
         <p><span>{{post.UserName}}</span></p>
     </div>
     <div class="post-content">
-        <img [src]=post.Content alt="">
+        <p>{{post.Content}}</p>
+        <div *ngIf=post.imageUrl class="post-image">
+            <img [src]=[post.imageUrl] alt="">
+        </div>
     </div>
     <div class="post-actions">
         <fa-icon [icon]="likeIcon"></fa-icon>

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IPost } from './Interfaces/IPost';
 
@@ -6,24 +7,37 @@ import { IPost } from './Interfaces/IPost';
 })
 export class PostsService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getFeed(): IPost[] {
+    return 
+  }
 
   getAllPosts(): IPost[] {
     return [
       {
-        Content: 'https://picsum.photos/200/300?random=1',
+        imageUrl: 'https://picsum.photos/200/300?random=1',
         CreatedOn: '00:00:2020 00:00',
-        UserName: 'Pesho1'
+        UserName: 'Pesho1',
+        Content: null,
       },
       {
-        Content: 'https://picsum.photos/200/300?random=2',
+        imageUrl: null,
+        CreatedOn: '00:00:2020 00:00',
+        UserName: 'Pesho1',
+        Content: 'TestPost23145',
+      },
+      {
+        imageUrl: 'https://picsum.photos/200/300?random=2',
         CreatedOn: '00:10:2020 23:00',
-        UserName: 'Pesho2'
+        UserName: 'Pesho2',
+        Content: 'TestPost315',
       },
       {
-        Content: 'https://picsum.photos/200/300?random=3',
+        imageUrl: 'https://picsum.photos/200/300?random=3',
         CreatedOn: '24:05:2020 02:00',
-        UserName: 'Pesho3'
+        UserName: 'Pesho3',
+        Content: 'TestPost135',
       },
     ];
   }

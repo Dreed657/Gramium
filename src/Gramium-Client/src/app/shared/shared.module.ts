@@ -1,8 +1,9 @@
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './loader/loader.component';
 import { PostComponent } from './post/post.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
 
 const DIcontainer = [
   LoaderComponent,
@@ -14,6 +15,7 @@ const DIcontainer = [
   declarations: [DIcontainer],
   imports: [
     CommonModule,
+    HttpClientModule,
     FontAwesomeModule
   ],
   exports: [DIcontainer]
