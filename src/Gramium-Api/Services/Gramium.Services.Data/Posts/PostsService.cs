@@ -47,6 +47,9 @@
             }
 
             // TODO: CHANGE POST MODEL TO BE DELETABLE
+            this.postRepo.Delete(post);
+            await this.postRepo.SaveChangesAsync();
+
             return true;
         }
 

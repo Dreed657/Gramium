@@ -10,6 +10,7 @@ import { FeedComponent } from './feed/feed.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AppRoutingModule,
     SharedModule,
     UserModule,
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

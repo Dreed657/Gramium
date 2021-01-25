@@ -1,9 +1,8 @@
-﻿using AutoMapper;
-
-namespace Gramium.Web.ViewModels.Posts
+﻿namespace Gramium.Web.ViewModels.Posts
 {
     using System;
 
+    using AutoMapper;
     using Gramium.Data.Models;
     using Gramium.Services.Mapping;
     using Gramium.Web.ViewModels.User;

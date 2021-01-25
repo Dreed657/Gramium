@@ -1,6 +1,7 @@
+import { PostsService } from './../services/posts.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { IPost } from '../Interfaces/IPost';
-import { faPaperPlane, faHeartbeat, faCircle, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faHeartbeat, faCircle, faComment, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-post',
@@ -13,12 +14,18 @@ export class PostComponent implements OnInit {
   commentIcon = faComment;
   sendIcon = faPaperPlane;
   profileIcon = faCircle;
+  menuIcon = faEllipsisV;
+
 
   @Input() post: IPost;
 
-  constructor() { }
+  constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
   }
 
+  deleteHandler(): void {
+    console.log(this.post.id);
+    this.postsService.deletePost(this.post.id).subscribe();
+  }
 }

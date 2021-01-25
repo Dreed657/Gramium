@@ -7,17 +7,13 @@ div.post {
     width: $post-size;
     overflow: hidden;
     div.post-header {
-        fa-icon {
+        fa-icon.profileIcon {
             font-size: 30px;
             margin-right: 15px;
         }
         p {
             font-weight: 700;
             text-align: left;
-            position: relative;            
-        }
-        * {
-            display: inline-block;
         }
     }
     div.profileImg {

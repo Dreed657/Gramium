@@ -17,4 +17,8 @@ export class PostsService {
   createPost(data): Observable<IPost>  {
     return this.http.post<IPost>('/api/posts', data);
   }
+
+  deletePost(postId: number): Observable<any> {
+    return this.http.delete(`/api/posts/${postId}`);
+  }
 }

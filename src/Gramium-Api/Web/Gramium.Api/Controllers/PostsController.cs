@@ -73,10 +73,10 @@ namespace Gramium.Api.Controllers
             return this.Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{postId}")]
+        public async Task<IActionResult> Delete(int postId)
         {
-            var result = await this.postsService.DeleteAsync(id);
+            var result = await this.postsService.DeleteAsync(postId);
 
             if (!result)
             {

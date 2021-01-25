@@ -4,7 +4,7 @@
 
     using Gramium.Data.Common.Models;
 
-    public class Post : BaseModel<int>
+    public class Post : BaseDeletableModel<int>
     {
         [Required]
         [MaxLength(250)]

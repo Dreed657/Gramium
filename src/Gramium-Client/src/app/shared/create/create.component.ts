@@ -13,6 +13,8 @@ export class CreateComponent {
     ImageUrl: new FormControl('', [Validators.required]),
   });
 
+  showImg = false;
+
   @Output() newPost = new EventEmitter();
 
   constructor(private postsService: PostsService) { }
@@ -21,6 +23,10 @@ export class CreateComponent {
     this.postsService.createPost(this.form.value).subscribe(x => {
       this.newPost.emit(x);
     });
+  }
+
+  showImgHandler(): void {
+    this.showImg = !this.showImg;
   }
 
 }
