@@ -1,10 +1,13 @@
 <div class="post my-5 mx-5">
     <div class="post-header">
         <fa-icon [icon]="profileIcon"></fa-icon>
-        <p><span>{{post.UserName}}</span></p>
+        <p><span>{{post.userName}}</span></p>
     </div>
     <div class="post-content">
-        <img [src]=post.Content alt="">
+        <p>{{post.content}}</p>
+        <div *ngIf=post.imageUrl class="post-image">
+            <img [src]=[post.imageUrl] alt="">
+        </div>
     </div>
     <div class="post-actions">
         <fa-icon [icon]="likeIcon"></fa-icon>
@@ -12,6 +15,6 @@
         <fa-icon [icon]="sendIcon"></fa-icon>
     </div>
     <div class="post-comments">
-        <p>Date: <time>{{post.CreatedOn}}</time></p>
+        <p>Date: <time>{{post.createdOn | timeDiff}}</time></p>
     </div>
 </div>

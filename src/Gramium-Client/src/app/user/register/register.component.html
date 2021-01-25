@@ -1,0 +1,23 @@
+<div class="register my-5 mx-auto">
+    <form [formGroup]=registerFrom (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input formControlName="username" type="text" class="form-control" id="username" aria-describedby="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input formControlName="email" type="email" class="form-control" id="email" aria-describedby="Email" placeholder="Email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+        <div class="form-group mb-2">
+          <label for="password">Password</label>
+          <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <div class="form-group mb-2">
+          <label for="repassword">RePassword</label>
+          <input formControlName="repassword" type="password" class="form-control" id="repassword" placeholder="RePassword">
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!registerFrom.valid">Login</button>
+    </form>
+    <a [routerLink]="['/login']" class="register-link my-2 text-center">Already have an account?</a>
+</div>

@@ -13,8 +13,9 @@
     "target": "es2015",
     "module": "es2020",
     "lib": [
-      "es2018",
-      "dom"
+      "DOM",
+      "ES2020",
+      "ESNext"
     ]
   }
 }

@@ -1,31 +1,18 @@
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './core/guards/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FeedComponent } from './feed/feed.component';
-import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    component: FeedComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
+    canActivate: [AuthGuard],
+    component: FeedComponent
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    component: NotFoundComponent
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+export const AppRoutingModule = RouterModule.forRoot(routes);

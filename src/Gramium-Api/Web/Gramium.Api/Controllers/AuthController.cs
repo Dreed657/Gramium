@@ -22,18 +22,23 @@ namespace Gramium.Api.Controllers
             this.apiConfig = apiConfig;
         }
 
-        // TODO: REMOVE HARD CODED SECRET
         [AllowAnonymous]
         [HttpPost("Login")]
+        [ProducesResponseType(401)]
         [ProducesResponseType(401)]
         [ProducesResponseType(200, Type = typeof(LoginResponseModel))]
         public async Task<IActionResult> Login([FromBody] UserLoginModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+            
             var validToken = await this.authService.AuthenticateUserAsync(model, this.apiConfig.JwtSecret);
 
             if (!string.IsNullOrEmpty(validToken))
             {
-                this.HttpContext.Response.Cookies.Append("auth", validToken);
+                //this.HttpContext.Response.Cookies.Append("auth", validToken);
                 return Ok(new LoginResponseModel(validToken));
             }
 
@@ -44,6 +49,11 @@ namespace Gramium.Api.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
             var result = await this.authService.RegisterUser(model);
             if (!result)
             {
