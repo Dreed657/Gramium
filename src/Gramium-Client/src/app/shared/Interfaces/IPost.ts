@@ -1,6 +1,6 @@
 export interface IPost {
-    Content: string;
+    content: string;
     imageUrl: string;
-    UserName: string;
-    CreatedOn: string;
+    userName: string;
+    createdOn: string;
 }

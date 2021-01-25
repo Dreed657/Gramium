@@ -51,7 +51,7 @@
 
         public async Task<IEnumerable<T>> GetAllAsync<T>()
         {
-            return await this.postRepo.All().To<T>().ToListAsync();
+            return await this.postRepo.All().OrderByDescending(x => x.CreatedOn).To<T>().ToListAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllByUserIdAsync<T>(string userId)

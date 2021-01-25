@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IPost } from '../shared/Interfaces/IPost';
-import { PostsService } from '../shared/posts.service';
+import { PostsService } from '../shared/services/posts.service';
 
 @Component({
   selector: 'app-feed',
@@ -14,10 +14,10 @@ export class FeedComponent implements OnInit {
   constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
-    this.posts = this.postsService.getAllPosts();
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2500);
+    this.postsService.getFeed().subscribe(data => {
+      console.log(data);
+      this.posts = data;
+    });
   }
 
 }

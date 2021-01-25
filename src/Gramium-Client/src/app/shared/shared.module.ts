@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './loader/loader.component';
 import { PostComponent } from './post/post.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TimeDiffPipe } from './pipes/time-diff.pipe';
 
 const DIcontainer = [
   LoaderComponent,
-  PostComponent
+  PostComponent,
+  TimeDiffPipe,
 ];
 
 
