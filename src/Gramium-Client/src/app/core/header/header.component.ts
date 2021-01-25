@@ -1,6 +1,8 @@
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { faHome, faPaperPlane, faCompass, faHeart, faCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { ActivationEnd, Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +17,17 @@ export class HeaderComponent implements OnInit {
   profileIcon = faCircle;
   logoutIcon = faSignOutAlt;
 
-  constructor(private authService: AuthService) { }
+  hideNavigation = true;
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    // this.router.events.pipe(
+    //   filter(e => e instanceof ActivationEnd),
+    //   map((e: ActivationEnd) => e.snapshot.data)
+    // ).subscribe(data => {
+    //   this.hideNavigation = data === undefined ? true : data.hideNavigation;
+    // });
   }
 
   logout(): void {

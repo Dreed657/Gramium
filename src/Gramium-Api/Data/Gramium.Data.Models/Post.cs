@@ -6,14 +6,14 @@
 
     public class Post : BaseModel<int>
     {
-        public int id;
-
         [Required]
         [MaxLength(250)]
         public string Content { get; set; }
 
         [Required]
         public string CreatorId { get; set; }
+
+        public string ImageUrl { get; set; }
 
         public ApplicationUser Creator { get; set; }
     }

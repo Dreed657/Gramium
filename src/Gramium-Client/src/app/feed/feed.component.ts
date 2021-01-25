@@ -15,9 +15,13 @@ export class FeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.postsService.getFeed().subscribe(data => {
-      console.log(data);
       this.posts = data;
     });
+  }
+
+  getNewPost(event): void {
+    console.log(event);
+    this.posts.push(event);
   }
 
 }

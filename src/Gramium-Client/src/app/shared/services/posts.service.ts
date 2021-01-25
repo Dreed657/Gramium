@@ -13,4 +13,8 @@ export class PostsService {
   getFeed(): Observable<IPost[]> {
     return this.http.get<IPost[]>('/api/posts/getall');
   }
+
+  createPost(data): Observable<IPost>  {
+    return this.http.post<IPost>('/api/posts', data);
+  }
 }

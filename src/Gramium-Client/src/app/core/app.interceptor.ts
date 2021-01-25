@@ -1,13 +1,7 @@
 import { AuthService } from './auth.service';
 import { environment } from './../../environments/environment';
 import { Injectable, Provider } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HTTP_INTERCEPTORS
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const apiURL = environment.ApiUrl;
@@ -31,7 +25,6 @@ export class AppInterceptor implements HttpInterceptor {
         },
       });
     }
-
     return next.handle(req);
   }
 }

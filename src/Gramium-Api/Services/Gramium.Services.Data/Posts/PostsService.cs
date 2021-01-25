@@ -27,6 +27,7 @@
             var post = new Post()
             {
                 Content = model.Content,
+                ImageUrl = model.ImageUrl,
                 CreatorId = userId,
             };
 
@@ -38,7 +39,7 @@
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var post = await this.postRepo.All().FirstOrDefaultAsync(x => x.id == id);
+            var post = await this.postRepo.All().FirstOrDefaultAsync(x => x.Id == id);
 
             if (post == null)
             {
@@ -61,12 +62,12 @@
 
         public async Task<T> GetByIdAsync<T>(int id)
         {
-            return await this.postRepo.All().Where(x => x.id == id).To<T>().FirstOrDefaultAsync();
+            return await this.postRepo.All().Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
         }
 
         public async Task<bool> UpdateAsync(PostInputModel model, int id)
         {
-            var post = await this.postRepo.All().FirstOrDefaultAsync(x => x.id == id);
+            var post = await this.postRepo.All().FirstOrDefaultAsync(x => x.Id == id);
 
             if (post == null)
             {

@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthService } from './auth.service';
@@ -18,7 +19,8 @@ const DIcontainer = [
   imports: [
     CommonModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
   ],
   providers: [
     AuthService,
