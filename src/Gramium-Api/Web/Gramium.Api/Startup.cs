@@ -32,6 +32,7 @@ using AutoMapper;
 using Gramium.Services.Data.Posts;
 using AutoMapper.Configuration;
 using Gramium.Services.Data.Authentication.CurrentUser;
+using Gramium.Services.Data.Users;
 using Gramium.Web.Infrastructure.Filters;
 
 namespace Gramium.Api
@@ -97,6 +98,7 @@ namespace Gramium.Api
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IUsersService, UsersService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IPostsService, PostsService>();
