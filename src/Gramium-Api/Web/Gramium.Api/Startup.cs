@@ -97,7 +97,6 @@ namespace Gramium.Api
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IPostsService, PostsService>();
