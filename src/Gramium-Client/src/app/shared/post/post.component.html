@@ -1,26 +1,19 @@
 <div class="post my-5 mx-5">
     <div class="post-header">
-        <div class="row">
-            <div class="col-1">
-                <fa-icon class="profileIcon" [icon]="profileIcon"></fa-icon>
-            </div>
-            <div class="col-1">
-                <p class="my-3">{{post.userName}}</p>
-            </div>
-            <div class="col-9">
-
-            </div>
-            <div class="col-1">
-                <button mat-icon-button [matMenuTriggerFor]="menu" class="btn btn-primary" aria-label="Example icon-button with a menu">
-                    <mat-icon>more_vert</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="deleteHandler()">
-                      <mat-icon>delete</mat-icon>
-                      <span>Delete</span>
-                    </button>
-                  </mat-menu>
-            </div>
+        <div class="heading-user-info">
+            <fa-icon class="profileIcon" [icon]="profileIcon"></fa-icon>
+            <p class="my-3">{{post.userName}}</p>
+        </div>
+        <div class="heading-menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="btn btn-primary" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="deleteHandler()">
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
+                </button>
+            </mat-menu>
         </div>
     </div>
     <div class="post-content">
