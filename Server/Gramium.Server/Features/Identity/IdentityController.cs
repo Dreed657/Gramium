@@ -32,6 +32,8 @@ namespace Gramium.Server.Features.Identity
         {
             var user = new ApplicationUser()
             {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.UserName
             };
@@ -50,7 +52,7 @@ namespace Gramium.Server.Features.Identity
         [Route(nameof(Login))]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel model)
         {
-            var user = await this.userManager.FindByNameAsync(model.UserName);
+            var user = await this.userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return Unauthorized();

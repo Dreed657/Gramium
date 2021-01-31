@@ -1,0 +1,5 @@
+<!-- <app-loader [isLoading]="posts.length"></app-loader> -->
+
+<div class="card-deck">
+    <app-post *ngFor="let post of posts" [post]=post></app-post>
+</div>
