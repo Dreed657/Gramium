@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IPost } from 'src/app/shared/Interfaces/IPost';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-listing',
@@ -7,13 +8,20 @@ import { IPost } from 'src/app/shared/Interfaces/IPost';
   styleUrls: ['./post-listing.component.scss']
 })
 export class PostListingComponent implements OnInit {
-  posts: IPost[];
+  posts: IPost[] | undefined;
 
-  constructor() {
-    this.posts = [];
-  }
+  constructor(private postService: PostsService) { }
 
   ngOnInit(): void {
+    this.postService.getAll().subscribe({
+      next: (res) => {
+        this.posts = res;
+        console.log(res);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 
 }

@@ -11,10 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-const DIcontainer = [HeaderComponent];
-
 @NgModule({
-  declarations: [DIcontainer, LoginComponent, RegisterComponent],
+  declarations: [HeaderComponent, LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -29,6 +27,6 @@ const DIcontainer = [HeaderComponent];
   providers: [
     appInterceptorProvider
   ],
-  exports: [DIcontainer]
+  exports: [HeaderComponent]
 })
 export class CoreModule { }

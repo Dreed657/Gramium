@@ -80,6 +80,19 @@ namespace Gramium.Server.Features.Posts.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<PostListingModel>> GetAll()
+        {
+            return await this.db
+                .Posts
+                .Select(x => new PostListingModel()
+                {
+                    Id = x.Id,
+                    Content = x.Content,
+                    ImageUrl = x.ImageUrl,
+                })
+                .ToListAsync();
+        }
+
         public async Task<PostDetailViewModel> DetailsAsync(int id)
         {
             return await this.db

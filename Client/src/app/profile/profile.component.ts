@@ -1,4 +1,6 @@
+import { AuthService } from './../core/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { IUser } from '../shared/Interfaces/IUser';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  user!: IUser;
+
+  isLoading = false;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-  }
+    this.isLoading = true;
 
+    this.authService.getUser().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.user = res;
+        console.log(res);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error(err);
+      }
+    });
+  }
 }

@@ -8,7 +8,7 @@ import { IPost } from 'src/app/shared/Interfaces/IPost';
 })
 export class PostComponent implements OnInit {
 
-  @Input() post: IPost | undefined;
+  @Input() post!: IPost;
 
   constructor() { }
 

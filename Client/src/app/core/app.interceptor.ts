@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Injectable, Provider } from '@angular/core';
 import {
   HttpRequest,
@@ -14,12 +15,20 @@ const apiURL = environment.ApiUrl;
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!req.url.includes('http')) {
       req = req.clone({
         url: `${apiURL}${req.url}`,
+      });
+    }
+
+    if (req.url.includes(apiURL) && this.authService.isAuthenticated) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.authService.getToken()}`
+        }
       });
     }
 

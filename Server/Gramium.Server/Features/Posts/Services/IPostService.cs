@@ -15,6 +15,8 @@ namespace Gramium.Server.Features.Posts.Services
 
         Task<IEnumerable<PostListingModel>> ByUserAsync(string userId);
 
+        Task<IEnumerable<PostListingModel>> GetAll();
+
         Task<PostDetailViewModel> DetailsAsync(int id);
     }
 }

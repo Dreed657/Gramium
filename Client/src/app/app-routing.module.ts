@@ -19,12 +19,10 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    canDeactivate: [AuthGuard],
     component: LoginComponent,
   },
   {
     path: 'register',
-    canDeactivate: [AuthGuard],
     component: RegisterComponent,
   }
 ];

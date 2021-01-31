@@ -1,4 +1,6 @@
-﻿namespace Gramium.Server.Features.Posts
+﻿using System.Collections;
+
+namespace Gramium.Server.Features.Posts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -20,6 +22,12 @@
             this.posts = posts;
         }
 
+        [HttpGet("GetAll")]
+        public async Task<IEnumerable<PostListingModel>> GetAll()
+        {
+            return await this.posts.GetAll();
+        }
+        
         [HttpGet]
         public async Task<IEnumerable<PostListingModel>> Mine()
         {

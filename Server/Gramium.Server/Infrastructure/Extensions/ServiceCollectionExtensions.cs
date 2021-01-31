@@ -3,6 +3,7 @@ using Gramium.Server.Data;
 using Gramium.Server.Data.Models;
 using Gramium.Server.Features.Identity.Services;
 using Gramium.Server.Features.Posts.Services;
+using Gramium.Server.Features.Profiles.Services;
 using Gramium.Server.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -74,6 +75,7 @@ namespace Gramium.Server.Infrastructure.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             return services
+                .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<ICurrentUserService, CurrentUserService>()
                 .AddTransient<IPostService, PostService>();
