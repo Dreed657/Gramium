@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 
 namespace Gramium.Server.Data.Models
 {
@@ -10,6 +11,12 @@ namespace Gramium.Server.Data.Models
     
     public class Post : DeletableEntity<int>
     {
+        public Post()
+        {
+            this.Likes = new HashSet<Like>();
+            this.Comments = new HashSet<Comment>();
+        }
+            
         [Required]
         [MaxLength(MaxContentLength)]
         public string Content { get; set; }
@@ -20,6 +27,10 @@ namespace Gramium.Server.Data.Models
         [Required]
         public string UserId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
+
+        public virtual ICollection<Like> Likes { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
