@@ -34,7 +34,7 @@ namespace Gramium.Server.Features.Comments.Services
             {
                 return "Post does not exists!";
             }
-            
+
             var commentEntity = new Comment()
             {
                 Content = model.Content,
