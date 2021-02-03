@@ -26,4 +26,10 @@
     <None Include="Infrastructure\Filters\ModelOrNotFoundActionFilter.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Follows\Models\" />
+    <Folder Include="Features\Likes\" />
+    <Folder Include="Features\Comments\" />
+  </ItemGroup>
+
 </Project>
