@@ -26,8 +26,4 @@
     <None Include="Infrastructure\Filters\ModelOrNotFoundActionFilter.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Comments\" />
-  </ItemGroup>
-
 </Project>

@@ -75,7 +75,9 @@ namespace Gramium.Server.Features.Posts.Services
                 {
                     Id = x.Id,
                     Content = x.Content,
-                    ImageUrl = x.ImageUrl
+                    ImageUrl = x.ImageUrl,
+                    Likes = x.Likes.Count,
+                    Comments = x.Comments.Count,
                 })
                 .ToListAsync();
         }
@@ -89,6 +91,8 @@ namespace Gramium.Server.Features.Posts.Services
                     Id = x.Id,
                     Content = x.Content,
                     ImageUrl = x.ImageUrl,
+                    Likes = x.Likes.Count,
+                    Comments = x.Comments.Count,
                 })
                 .ToListAsync();
         }

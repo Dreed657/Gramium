@@ -22,13 +22,13 @@ namespace Gramium.Server.Features.Posts
             this.posts = posts;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<IEnumerable<PostListingModel>> GetAll()
         {
             return await this.posts.GetAll();
         }
         
-        [HttpGet]
+        [HttpGet("Mine")]
         public async Task<IEnumerable<PostListingModel>> Mine()
         {
             return await this.posts.ByUserAsync(this.currentUser.GetId());
