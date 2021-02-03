@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Gramium.Server.Data.Models.Enums;
 using Gramium.Server.Features.Posts.Models;
 
 namespace Gramium.Server.Features.Profiles.Models
@@ -11,6 +12,14 @@ namespace Gramium.Server.Features.Profiles.Models
 
         public string UserName { get; set; }
 
-        public ICollection<PostViewModel> Posts { get; set; }
+        public Gender Gender { get; set; }
+
+        public string ProfileImageUrl { get; set; }
+
+        public int Posts { get; set; }
+
+        public int Followers { get; set; }
+
+        public int Following { get; set; }
     }
 }

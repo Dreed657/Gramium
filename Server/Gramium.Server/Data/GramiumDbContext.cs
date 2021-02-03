@@ -34,13 +34,13 @@ namespace Gramium.Server.Data
 
             builder.Entity<Follow>()
                 .HasOne(u => u.User)
-                .WithMany()
+                .WithMany(u => u.Followers)
                 .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
             
             builder.Entity<Follow>()
                 .HasOne(f => f.Follower)
-                .WithMany()
+                .WithMany(u => u.Following)
                 .HasForeignKey(f => f.FollowerId)
                 .OnDelete(DeleteBehavior.Restrict);
             
