@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Gramium.Server.Data.Models;
@@ -19,6 +20,40 @@ namespace Gramium.Server.Data
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+        
+        public DbSet<Like> Likes { get; set; }
+        
+        public DbSet<Follow> Follows { get; set; }
+        
+        public DbSet<Profile> Profiles { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Follow>()
+                .HasOne(u => u.User)
+                .WithMany()
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            builder.Entity<Follow>()
+                .HasOne(f => f.Follower)
+                .WithMany()
+                .HasForeignKey(f => f.FollowerId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            var entityTypes = builder.Model.GetEntityTypes().ToList();
+
+            var foreignKeys = entityTypes
+                .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
+            foreach (var foreignKey in foreignKeys)
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             this.ApplyAuditInformation();
@@ -31,6 +66,12 @@ namespace Gramium.Server.Data
             this.ApplyAuditInformation();
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
+            where T : class, IDeletableEntity
+        {
+            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
         }
 
         private void ApplyAuditInformation()

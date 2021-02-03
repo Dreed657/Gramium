@@ -8,10 +8,8 @@ namespace Gramium.Server.Data.Models
 
     using static Constraints.Post;
     
-    public class Post : DeletableEntity
+    public class Post : DeletableEntity<int>
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(MaxContentLength)]
         public string Content { get; set; }

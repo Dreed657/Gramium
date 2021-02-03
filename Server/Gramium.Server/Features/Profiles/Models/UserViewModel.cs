@@ -3,7 +3,7 @@ using Gramium.Server.Features.Posts.Models;
 
 namespace Gramium.Server.Features.Profiles.Models
 {
-    public class UserViewModel
+    public class ProfileViewModel
     {
         public string FirstName { get; set; }
 

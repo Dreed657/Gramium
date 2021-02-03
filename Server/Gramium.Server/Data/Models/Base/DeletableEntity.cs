@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Gramium.Server.Data.Models.Base
 {
-    public class DeletableEntity : Entity, IDeletableEntity
+    public abstract class DeletableEntity<TKey> : Entity<TKey>, IDeletableEntity
     {
         public DateTime? DeletedOn { get; set; }
 

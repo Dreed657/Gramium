@@ -4,14 +4,16 @@ using Gramium.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gramium.Server.data.Migrations
 {
     [DbContext(typeof(GramiumDbContext))]
-    partial class GramiumDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210203123648_UserModelRefactorings")]
+    partial class UserModelRefactorings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,119 +148,6 @@ namespace Gramium.Server.data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Gramium.Server.Data.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("Gramium.Server.Data.Models.Follow", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FollowerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("isApproved")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FollowerId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Follows");
-                });
-
-            modelBuilder.Entity("Gramium.Server.Data.Models.Like", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Likes");
-                });
-
             modelBuilder.Entity("Gramium.Server.Data.Models.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -303,14 +192,8 @@ namespace Gramium.Server.data.Migrations
                     b.Property<string>("userId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Gender")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("ProfileImage")
                         .HasColumnType("nvarchar(max)");
@@ -433,69 +316,12 @@ namespace Gramium.Server.data.Migrations
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("Gramium.Server.Data.Models.Comment", b =>
-                {
-                    b.HasOne("Gramium.Server.Data.Models.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Gramium.Server.Data.Models.ApplicationUser", "User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Gramium.Server.Data.Models.Follow", b =>
-                {
-                    b.HasOne("Gramium.Server.Data.Models.ApplicationUser", "Follower")
-                        .WithMany()
-                        .HasForeignKey("FollowerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Gramium.Server.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Follower");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Gramium.Server.Data.Models.Like", b =>
-                {
-                    b.HasOne("Gramium.Server.Data.Models.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Gramium.Server.Data.Models.ApplicationUser", "User")
-                        .WithMany("Likes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Gramium.Server.Data.Models.Post", b =>
                 {
                     b.HasOne("Gramium.Server.Data.Models.ApplicationUser", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -506,7 +332,7 @@ namespace Gramium.Server.data.Migrations
                     b.HasOne("Gramium.Server.Data.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -515,7 +341,7 @@ namespace Gramium.Server.data.Migrations
                     b.HasOne("Gramium.Server.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -524,7 +350,7 @@ namespace Gramium.Server.data.Migrations
                     b.HasOne("Gramium.Server.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -533,13 +359,13 @@ namespace Gramium.Server.data.Migrations
                     b.HasOne("Gramium.Server.Data.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Gramium.Server.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -548,16 +374,12 @@ namespace Gramium.Server.data.Migrations
                     b.HasOne("Gramium.Server.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Gramium.Server.Data.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Comments");
-
-                    b.Navigation("Likes");
-
                     b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
