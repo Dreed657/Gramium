@@ -16,5 +16,7 @@ namespace Gramium.Server.Features.Posts.Models
         public int Likes { get; set; }
 
         public int Comments { get; set; }
+
+        public bool isLiked { get; set; }
     }
 }

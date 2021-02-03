@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Gramium.Server.Data;
 using Gramium.Server.Data.Models;
+using Gramium.Server.Features.Comments.Models;
+using Gramium.Server.Features.Likes.Services;
 using Gramium.Server.Features.Posts.Models;
 using Gramium.Server.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +16,12 @@ namespace Gramium.Server.Features.Posts.Services
     public class PostService : IPostService
     {
         private readonly GramiumDbContext db;
+        private readonly ICurrentUserService currentUser;
 
-        public PostService(GramiumDbContext db)
+        public PostService(GramiumDbContext db, ICurrentUserService currentUser)
         {
             this.db = db;
+            this.currentUser = currentUser;
         }
         
         public async Task<int> CreateAsync(string imageUrl, string content, string userId)
@@ -65,13 +70,13 @@ namespace Gramium.Server.Features.Posts.Services
             return false;
         }
 
-        public async Task<IEnumerable<PostListingModel>> ByUserAsync(string userId)
+        public async Task<IEnumerable<PostViewModel>> ByUserAsync(string userId)
         {
             return await this.db
                 .Posts
                 .Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.CreatedOn)
-                .Select(x => new PostListingModel()
+                .Select(x => new PostViewModel()
                 {
                     Id = x.Id,
                     Content = x.Content,
@@ -82,17 +87,18 @@ namespace Gramium.Server.Features.Posts.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<PostListingModel>> GetAll()
+        public async Task<IEnumerable<PostViewModel>> GetAllAsync()
         {
             return await this.db
                 .Posts
-                .Select(x => new PostListingModel()
+                .Select(x => new PostViewModel()
                 {
                     Id = x.Id,
                     Content = x.Content,
                     ImageUrl = x.ImageUrl,
                     Likes = x.Likes.Count,
                     Comments = x.Comments.Count,
+                    isLiked = x.Likes.Any(y => y.UserId == this.currentUser.GetId()),
                 })
                 .ToListAsync();
         }
@@ -108,7 +114,14 @@ namespace Gramium.Server.Features.Posts.Services
                     Content = x.Content,
                     ImageUrl = x.ImageUrl,
                     UserId = x.UserId,
-                    UserName = x.User.UserName
+                    UserName = x.User.UserName,
+                    CommentsCount = x.Comments.Count,
+                    Comments = x.Comments.Select(c => new CommentViewModel()
+                    {
+                        Content = c.Content,
+                    }).ToList(),
+                    Likes = x.Likes.Count,
+                    isLiked = x.Likes.Any(y => y.UserId == this.currentUser.GetId()),
                 })
                 .FirstOrDefaultAsync();
         }

@@ -13,9 +13,9 @@ namespace Gramium.Server.Features.Posts.Services
 
         Task<Result> DeleteAsync(int id, string userId);
 
-        Task<IEnumerable<PostListingModel>> ByUserAsync(string userId);
+        Task<IEnumerable<PostViewModel>> ByUserAsync(string userId);
 
-        Task<IEnumerable<PostListingModel>> GetAll();
+        Task<IEnumerable<PostViewModel>> GetAllAsync();
 
         Task<PostDetailViewModel> DetailsAsync(int id);
     }
