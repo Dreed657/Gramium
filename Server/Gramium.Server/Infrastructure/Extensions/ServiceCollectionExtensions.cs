@@ -3,6 +3,7 @@ using Gramium.Server.Data;
 using Gramium.Server.Data.Models;
 using Gramium.Server.Features.Follows.Services;
 using Gramium.Server.Features.Identity.Services;
+using Gramium.Server.Features.Likes.Services;
 using Gramium.Server.Features.Posts.Services;
 using Gramium.Server.Features.Profiles.Services;
 using Gramium.Server.Infrastructure.Services;
@@ -76,6 +77,7 @@ namespace Gramium.Server.Infrastructure.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             return services
+                .AddTransient<ILikesService, LikesService>()
                 .AddTransient<IFollowsService, FollowsService>()
                 .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<IIdentityService, IdentityService>()
