@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Gramium.Server.Data;
 using Gramium.Server.Data.Models;
 using Gramium.Server.Infrastructure.Services;
@@ -29,9 +30,14 @@ namespace Gramium.Server.Features.Likes.Services
 
                 await this.db.Likes.AddAsync(entity);
             }
-            
-            await this.db.SaveChangesAsync();
+            else
+            {
+                likeEntity.IsDeleted = false;
+                likeEntity.DeletedOn = null;
+            }
 
+            await this.db.SaveChangesAsync();
+            
             return true;
         }
 
@@ -52,7 +58,9 @@ namespace Gramium.Server.Features.Likes.Services
 
         public async Task<bool> IsLike(int postId, string userId)
         {
-            return await this.db.Likes.AnyAsync(x => x.UserId == userId && x.PostId == postId);
+            return await this.db.Likes
+                .Where(x => !x.IsDeleted)
+                .AnyAsync(x => x.UserId == userId && x.PostId == postId);
         }
     }
 }

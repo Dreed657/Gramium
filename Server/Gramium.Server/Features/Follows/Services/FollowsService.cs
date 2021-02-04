@@ -59,20 +59,20 @@ namespace Gramium.Server.Features.Follows.Services
                 return "You are trying to unFollow yourself!";
             }
 
-            var isAlreadyFollower = await this.db.Follows
-                .Where(x => !x.IsDeleted)
-                .AnyAsync(x => x.UserId == followerId && x.FollowerId == userId);
-
-            if (isAlreadyFollower)
-            {
-                return "This user is not followed.";
-            }
-            
             var user = await this.db.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null)
             {
                 return "User cannot be found!";
+            }
+
+            var isAlreadyFollower = await this.db.Follows
+                .Where(x => !x.IsDeleted)
+                .AnyAsync(x => x.UserId == userId && x.FollowerId == followerId);
+
+            if (!isAlreadyFollower)
+            {
+                return "This user is not followed.";
             }
 
             var followEntity = await this.db.Follows.FirstOrDefaultAsync(x => x.UserId == userId && x.FollowerId == followerId);
