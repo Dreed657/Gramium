@@ -1,1 +1,54 @@
-<p>post-detail works!</p>
+<app-header></app-header>
+
+<div class="container mt-4">
+    <app-loader [isLoading]=isPostLoading></app-loader>
+
+    <div *ngIf=post class="card mb-3 mx-auto">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img
+                    src="{{post.imageUrl}}"
+                    alt="Card image gap"
+                    class="img-fluid"
+                    />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{post.userName}}</h5>
+                    <p class="card-text">{{post.content}}</p>
+                    <p class="card-text">
+                        <small class="text-muted">{{post.createdOn}}</small>
+                    </p>
+                </div>
+                <hr class="w-75">
+                <div class="controls">
+                    <div class="like">
+                        <div class="like-button">
+                            <i *ngIf="post.isLiked" (click)="unLike()"
+                                class="far fa-heart"></i>
+                            <i *ngIf="!post.isLiked" (click)="like()"
+                                class="fas fa-heart"></i>
+                        </div>
+                        <div class="like-count">
+                            <p>{{post.likes}}</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-icon">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                        <div class="comment-count">
+                            <p>{{post.commentsCount}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isPostLoading && !post" class="text-center mx-auto mt-5">
+        <h3 class="font-weight-bold">Sorry, this page isn't available.</h3>
+        <p>The link you followed may be broken, or the page may have been
+            removed. Go back to <a [routerLink]="['/']">safety</a>.</p>
+    </div>
+</div>

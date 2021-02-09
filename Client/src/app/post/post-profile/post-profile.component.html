@@ -1,4 +1,4 @@
-<div class="card mx-auto" (mouseover)="showOverlayHandler()" (mouseleave)="hideOverlayHandler()">
+<div class="card mx-auto" (mouseover)="showOverlayHandler()" (mouseleave)="hideOverlayHandler()" (click)="goToHandler()">
     <img class="card-img-top" src="{{post.imageUrl}}" alt="Card image cap">
     <div class="card-img-overlay" [ngClass]="{'inSet': showInfo}">
         <div *ngIf=showInfo class="controls">

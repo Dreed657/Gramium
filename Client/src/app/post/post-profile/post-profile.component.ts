@@ -1,4 +1,6 @@
+import { PostsService } from './../posts.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IPost } from 'src/app/shared/Interfaces/IPost';
 
 @Component({
@@ -11,15 +13,19 @@ export class PostProfileComponent implements OnInit {
 
   showInfo = false;
 
-  constructor() { }
+  constructor(private router: Router, private postService: PostsService) { }
 
   ngOnInit(): void {
+  }
+
+  goToHandler(): void {
+    this.router.navigate(['/post', this.post.id]);
   }
 
   showOverlayHandler(): void {
     this.showInfo = true;
   }
-  
+
   hideOverlayHandler(): void {
     this.showInfo = false;
   }
