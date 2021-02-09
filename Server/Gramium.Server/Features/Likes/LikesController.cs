@@ -30,7 +30,7 @@ namespace Gramium.Server.Features.Likes
             return Ok();
         }
 
-        [HttpPut]
+        [HttpDelete]
         public async Task<IActionResult> UnLike(LikeInputModel model)
         {
             var result = await this.likes.UnLike(model.postId, this.currentUser.GetId());

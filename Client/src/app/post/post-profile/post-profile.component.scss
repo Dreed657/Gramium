@@ -1,0 +1,54 @@
+.card {
+    border: none;
+    border-radius: 0px;
+    padding: 0px;
+    width: 300px;
+    height: 300px;
+    * {
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    div.controls {
+        display: inline-flex;
+        div.like {
+            div.like-button {
+                width: 30px;
+                height: 30px;
+                display: inline-flex;
+                color: white;
+                font-size: 25px;
+            }
+            div.like-button:hover {
+                color: red;
+            }
+            div.like-count {
+                padding: 10px;
+                display: inline-flex;
+                color: white;
+            }
+        }
+        div.comment {
+            div.comment-icon {
+                width: 30px;
+                height: 30px;
+                display: inline-flex;
+                color: white;
+                font-size: 25px;
+            }
+            div.comment-count {
+                padding: 10px;
+                display: inline-flex;
+                color: white;
+            }
+        }
+    }
+}
+
+.inSet {
+    box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.75) inset;
+}

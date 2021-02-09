@@ -19,18 +19,18 @@ namespace Gramium.Server.Features.Profiles.Services
         public async Task<ProfileViewModel> GetProfile(string userId)
         {
             return await this.db
-                .Profiles
-                .Where(x => x.userId == userId)
+                .Users
+                .Where(x => x.Id == userId)
                 .Select(x => new ProfileViewModel()
                 {
-                    FirstName = x.User.FirstName,
-                    LastName = x.User.LastName,
-                    UserName = x.User.UserName,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    UserName = x.UserName,
                     Gender = x.Gender,
                     ProfileImageUrl = x.ProfileImage,
-                    Posts = x.User.Posts.Count,
-                    Followers = x.User.Followers.Count,
-                    Following = x.User.Following.Count,
+                    Posts = x.Posts.Count,
+                    Followers = x.Followers.Count,
+                    Following = x.Following.Count,
                 })
                 .FirstOrDefaultAsync();
         }

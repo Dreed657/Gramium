@@ -1,43 +1,54 @@
 <app-header></app-header>
 
-<app-loader [isLoading]=isLoading></app-loader>
+<app-loader [isLoading]=isInfoLoading></app-loader>
 
-<div *ngIf=!isLoading class="container border-left border-right">
+<div *ngIf=profileInfo class="container border-left border-right">
     <div class="profile-header">
         <div class="row">
             <div class="col-2">
-                <img src="https://instagram.fsof7-1.fna.fbcdn.net/v/t51.2885-19/s150x150/56400586_1998552273773825_5102809764878876672_n.jpg?_nc_ht=instagram.fsof7-1.fna.fbcdn.net&_nc_ohc=7Jy_ZHFbJ3cAX_SkhvG&tp=1&oh=67ea96a1657c5c609a2540d874c4fcef&oe=6040A1C2" alt="Profile image" class="profile-image img-thumbnail rounded m-2">
+                <img
+                    src="https://instagram.fsof7-1.fna.fbcdn.net/v/t51.2885-19/s150x150/56400586_1998552273773825_5102809764878876672_n.jpg?_nc_ht=instagram.fsof7-1.fna.fbcdn.net&_nc_ohc=7Jy_ZHFbJ3cAX_SkhvG&tp=1&oh=67ea96a1657c5c609a2540d874c4fcef&oe=6040A1C2"
+                    alt="Profile image" class="profile-image img-thumbnail
+                    rounded m-2">
             </div>
             <div class="col">
-                <div class="row">
+                <div class="row first-row mb-3 pb-3">
                     <div class="col">
-                        <h3 class="text-center">{{user?.userName}}</h3>
+                        <h3 class="text-center">{{profileInfo?.userName}}</h3>
                     </div>
                     <div class="col">
                         <button class="btn btn-primary">Edit Profile</button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row info-row">
                     <div class="col">
-                        <p>100 Posts</p>
+                        <p>{{profileInfo?.posts}} Posts</p>
                     </div>
                     <div class="col">
-                        <p>100 Followers</p>
+                        <p>{{profileInfo?.followers}} Followers</p>
                     </div>
                     <div class="col">
-                        <p>100 Following</p>
+                        <p>{{profileInfo?.following}} Following</p>
                     </div>
                 </div>
-                <div class="row">
-                    <h4>{{user?.firstName}} {{user?.lastName}}</h4>
+                <div class="row p-2 m-0">
+                    <h4>{{profileInfo?.firstName}} {{profileInfo?.lastName}}</h4>
                     <hr>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque porro animi quam sunt libero omnis voluptates maiores vero hic dolorem.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Eaque porro animi quam sunt libero omnis voluptates
+                        maiores vero hic dolorem.</p>
                 </div>
             </div>
         </div>
     </div>
     <hr>
-    <div class="card-deck">
-        <app-post *ngFor="let post of user?.posts" [post]=post></app-post>
+
+    <div class="profile-body">
+        <app-loader [isLoading]=isPostsLoading></app-loader>
+        <div *ngIf="posts">
+            <div class="cards">
+                <app-post-profile *ngFor="let post of posts" [post]=post></app-post-profile>
+            </div>
+        </div>
     </div>
 </div>

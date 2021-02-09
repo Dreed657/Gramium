@@ -26,8 +26,6 @@ namespace Gramium.Server.Data
         
         public DbSet<Follow> Follows { get; set; }
         
-        public DbSet<Profile> Profiles { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

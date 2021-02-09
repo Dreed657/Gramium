@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Gramium.Server.Data.Models.Base;
+using Gramium.Server.Data.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace Gramium.Server.Data.Models
@@ -22,7 +24,10 @@ namespace Gramium.Server.Data.Models
 
         public string LastName { get; set; }
 
-        public Profile Profile { get; set; }
+        public string ProfileImage { get; set; }
+
+        [DefaultValue(Enums.Gender.Other)]
+        public Gender Gender { get; set; }
 
         public ICollection<Post> Posts { get; set; }
 

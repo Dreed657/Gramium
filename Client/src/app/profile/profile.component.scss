@@ -1,7 +1,19 @@
 div.profile-header {
     margin-top: 20px;
+    div.first-row {
+        justify-content: center;
+        align-items: center;
+    }
+    div.info-row {
+        text-align: center;
+    }
     img.profile-image {
         width: 125px;
         height: 125px;
     }
+}
+div.cards {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-evenly;
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ILogin, IRegister } from '../shared/Interfaces/AUTH';
-import { IUser } from '../shared/Interfaces/IUser';
+import { IProfileInfo } from '../shared/Interfaces/IUser';
 
 const tokenKey = 'token';
 
@@ -14,8 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getUser(): Observable<IUser> {
-    return this.http.get<IUser>('/profiles');
+  getUser(): Observable<IProfileInfo> {
+    return this.http.get<IProfileInfo>('/profiles');
   }
 
   login(data: ILogin): Observable<any> {

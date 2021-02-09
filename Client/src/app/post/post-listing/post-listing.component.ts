@@ -16,7 +16,6 @@ export class PostListingComponent implements OnInit {
     this.postService.getAll().subscribe({
       next: (res) => {
         this.posts = res;
-        console.log(res);
       },
       error: (err) => {
         console.error(err);

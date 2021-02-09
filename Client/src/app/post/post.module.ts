@@ -7,8 +7,9 @@ import { SharedModule } from './../shared/shared.module';
 import { PostComponent } from './post/post.component';
 import { PostListingComponent } from './post-listing/post-listing.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { PostProfileComponent } from './post-profile/post-profile.component';
 
-const DIcontainer = [PostComponent, PostListingComponent, PostDetailComponent];
+const DIcontainer = [PostComponent, PostListingComponent, PostDetailComponent, PostProfileComponent];
 
 @NgModule({
   declarations: [DIcontainer],

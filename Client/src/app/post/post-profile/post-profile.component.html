@@ -1,0 +1,24 @@
+<div class="card mx-auto" (mouseover)="showOverlayHandler()" (mouseleave)="hideOverlayHandler()">
+    <img class="card-img-top" src="{{post.imageUrl}}" alt="Card image cap">
+    <div class="card-img-overlay" [ngClass]="{'inSet': showInfo}">
+        <div *ngIf=showInfo class="controls">
+            <div class="like">
+                <div class="like-button">
+                    <i *ngIf="post.isLiked" class="far fa-heart"></i>
+                    <i *ngIf="!post.isLiked" class="fas fa-heart"></i>
+                </div>
+                <div class="like-count">
+                    <p>{{post.likes}}</p>
+                </div>
+            </div>
+            <div class="comment">
+                <div class="comment-icon">
+                    <i class="fas fa-comment-alt"></i>
+                </div>
+                <div class="comment-count">
+                    <p>{{post.comments}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

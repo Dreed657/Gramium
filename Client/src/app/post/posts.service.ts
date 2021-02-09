@@ -12,11 +12,11 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getCurrentUserPosts(): Observable<IPost[]> {
-    return this.http.get<IPost[]>('/posts');
+    return this.http.get<IPost[]>('/posts/mine');
   }
 
   getAll(): Observable<IPost[]> {
-    return this.http.get<IPost[]>('/posts/GetAll');
+    return this.http.get<IPost[]>('/posts');
   }
 
   getPost(id: number): Observable<IPost> {

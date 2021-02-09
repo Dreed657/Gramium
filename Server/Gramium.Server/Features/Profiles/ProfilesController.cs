@@ -23,7 +23,9 @@ namespace Gramium.Server.Features.Profiles
         [HttpGet]
         public async Task<IActionResult> GetUser()
         {
-            return Ok(await this.profile.GetProfile(this.current.GetId()));
+            var result = await this.profile.GetProfile(this.current.GetId());
+
+            return Ok(result);
         }
     }
 }
