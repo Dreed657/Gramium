@@ -17,10 +17,13 @@ namespace Gramium.Server.Features.Posts.Models
         public string ImageUrl { get; set; }
 
         public string Content { get; set; }
+
+        public DateTime CreatedOn { get; set; }
         
         public int CommentsCount { get; set; }
 
         public ICollection<CommentViewModel> Comments { get; set; }
+        
         public int Likes { get; set; }
 
         public bool isLiked { get; set; }

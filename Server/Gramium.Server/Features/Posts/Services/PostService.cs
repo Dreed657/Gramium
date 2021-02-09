@@ -81,8 +81,8 @@ namespace Gramium.Server.Features.Posts.Services
                     Id = x.Id,
                     Content = x.Content,
                     ImageUrl = x.ImageUrl,
-                    Likes = x.Likes.Count,
-                    Comments = x.Comments.Count,
+                    Likes = x.Likes.Count(y => !y.IsDeleted),
+                    Comments = x.Comments.Count(y => !y.IsDeleted),
                 })
                 .ToListAsync();
         }
@@ -96,9 +96,11 @@ namespace Gramium.Server.Features.Posts.Services
                     Id = x.Id,
                     Content = x.Content,
                     ImageUrl = x.ImageUrl,
-                    Likes = x.Likes.Count,
-                    Comments = x.Comments.Count,
-                    isLiked = x.Likes.Any(y => y.UserId == this.currentUser.GetId()),
+                    Likes = x.Likes.Count(y => !y.IsDeleted),
+                    Comments = x.Comments.Count(y => !y.IsDeleted),
+                    isLiked = x.Likes
+                        .Where(y => !y.IsDeleted)
+                        .Any(y => y.UserId == this.currentUser.GetId()),
                 })
                 .ToListAsync();
         }
@@ -115,13 +117,18 @@ namespace Gramium.Server.Features.Posts.Services
                     ImageUrl = x.ImageUrl,
                     UserId = x.UserId,
                     UserName = x.User.UserName,
-                    CommentsCount = x.Comments.Count,
+                    CommentsCount = x.Comments.Count(y => !y.IsDeleted),
+                    CreatedOn = x.CreatedOn,
                     Comments = x.Comments.Select(c => new CommentViewModel()
                     {
+                        UserName = c.User.UserName,
                         Content = c.Content,
+                        CreatedAt = c.CreatedOn,
                     }).ToList(),
-                    Likes = x.Likes.Count,
-                    isLiked = x.Likes.Any(y => y.UserId == this.currentUser.GetId()),
+                    Likes = x.Likes.Count(y => !y.IsDeleted),
+                    isLiked = x.Likes
+                        .Where(y => !y.IsDeleted)
+                        .Any(y => y.UserId == this.currentUser.GetId()),
                 })
                 .FirstOrDefaultAsync();
         }
