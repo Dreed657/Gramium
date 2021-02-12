@@ -24,8 +24,8 @@ export class PostsService {
     return this.http.get<IDetailPost>(`/posts/${id}`);
   }
 
-  createPost(data: ICreatePost): Observable<any> {
-    return this.http.post('/posts', data);
+  createPost(data: ICreatePost): Observable<{ id: number }> {
+    return this.http.post<{ id: number }>('/posts', data);
   }
 
   like(postId: number): Observable<any> {

@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { TimeDiffPipe } from './pipes/time-diff.pipe';
 import { CoreModule } from './../core/core.module';
 import { NgModule } from '@angular/core';
@@ -11,8 +12,9 @@ import { PostListingComponent } from './post-listing/post-listing.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostProfileComponent } from './post-profile/post-profile.component';
 import { RouterModule } from '@angular/router';
+import { PostCreateComponent } from './post-create/post-create.component';
 
-const DIcontainer = [PostComponent, PostListingComponent, PostDetailComponent, PostProfileComponent, TimeDiffPipe];
+const DIcontainer = [PostComponent, PostListingComponent, PostDetailComponent, PostProfileComponent, TimeDiffPipe, PostCreateComponent];
 
 @NgModule({
   declarations: [DIcontainer],
@@ -21,6 +23,7 @@ const DIcontainer = [PostComponent, PostListingComponent, PostDetailComponent, P
     RouterModule,
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     CardsModule,
     WavesModule,
     ButtonsModule

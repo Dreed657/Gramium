@@ -1,0 +1,13 @@
+<app-header></app-header>
+
+<div class="container">
+    <form [formGroup]=form (ngSubmit)="submitHandler()" class="text-center border border-light p-5">
+
+        <p class="h4 mb-4">Create Post</p>
+
+        <input type="text" formControlName="imageUrl" class="form-control mb-4" placeholder="ImageUrl">
+        <input type="text" formControlName="content" class="form-control mb-4" placeholder="Content">
+
+        <button mdbBtn color="info" type="submit" block="!!true" [disabled]=form.invalid>Send</button>
+    </form>
+</div>

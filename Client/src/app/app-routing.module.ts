@@ -1,3 +1,4 @@
+import { PostCreateComponent } from './post/post-create/post-create.component';
 import { PostDetailComponent } from './post/post-detail/post-detail.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RegisterComponent } from './core/register/register.component';
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'post/:postId',
     component: PostDetailComponent
+  },
+  {
+    path: 'create',
+    component: PostCreateComponent,
   },
   {
     path: 'login',
