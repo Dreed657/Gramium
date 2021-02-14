@@ -43,18 +43,5 @@ namespace Gramium.Server.Features.Follows
 
             return Ok();
         }
-
-        [HttpGet]
-        public async Task<IActionResult> IsFollowing(IsFollowInputModel model)
-        {
-            var result = await this.follow.IsFollower(model.userId, model.followerId);
-
-            var response = new IsFollowResponseModel()
-                {
-                    IsFollower = result,
-                };
-
-            return Ok(response);
-        }
     }
 }
