@@ -1,7 +1,7 @@
 import { PostsService } from './../posts.service';
 import { Component, OnInit } from '@angular/core';
 import { IPost } from 'src/app/shared/Interfaces/IPost';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IDetailPost } from 'src/app/shared/Interfaces/IDetailPost';
 
 @Component({
@@ -15,7 +15,7 @@ export class PostDetailComponent implements OnInit {
 
   isPostLoading = false;
 
-  constructor(private route: ActivatedRoute, private postService: PostsService) { }
+  constructor(private route: ActivatedRoute, private postService: PostsService, private router: Router) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params.postId;
@@ -28,7 +28,11 @@ export class PostDetailComponent implements OnInit {
       },
       error: (err) => {
         this.isPostLoading = false;
-        console.error(err);
+
+        // TODO: REFACTOR THIS REDIRECT
+        if (err.status === 404) {
+          this.router.navigate([`pagenotfound`]);
+        }
       }
     });
   }

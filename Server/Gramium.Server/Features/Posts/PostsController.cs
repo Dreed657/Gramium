@@ -36,9 +36,16 @@ namespace Gramium.Server.Features.Posts
 
         [HttpGet]
         [Route(Id)]
-        public async Task<PostDetailViewModel> Details(int id)
+        public async Task<ActionResult<PostDetailViewModel>> Details(int id)
         {
-            return await this.posts.DetailsAsync(id);
+            var result = await this.posts.DetailsAsync(id);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
         [HttpPost]

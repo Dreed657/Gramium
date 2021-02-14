@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gramium.Server.Features.Profiles.Models;
+﻿using System.Threading.Tasks;
 using Gramium.Server.Features.Profiles.Services;
 using Gramium.Server.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,18 +8,21 @@ namespace Gramium.Server.Features.Profiles
     public class ProfilesController : ApiController
     {
         private readonly IProfileService profile;
-        private readonly ICurrentUserService current;
 
-        public ProfilesController(IProfileService profile, ICurrentUserService current)
+        public ProfilesController(IProfileService profile)
         {
             this.profile = profile;
-            this.current = current;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUser()
+        public async Task<IActionResult> GetUser(string username)
         {
-            var result = await this.profile.GetProfile(this.current.GetId());
+            var result = await this.profile.GetProfile(username);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
 
             return Ok(result);
         }

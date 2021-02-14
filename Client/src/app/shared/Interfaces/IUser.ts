@@ -1,9 +1,12 @@
+import { IPost } from './IPost';
+
 export interface IProfileInfo {
     firstName: string;
     lastName: string;
     userName: string;
     profileImageUrl: string;
-    posts: number;
+    postsCount: number;
+    posts: IPost[];
     followers: number;
     following: number;
 }

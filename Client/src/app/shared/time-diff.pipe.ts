@@ -17,10 +17,10 @@ export class TimeDiffPipe implements PipeTransform {
     const msPerMonth = msPerDay * 30;
     const msPerYear = msPerMonth * 365;
 
+    // Angular compiler wont parse date correctly.... (quick fix)
     const valueDate = new Date(value);
     const offset = valueDate.getTimezoneOffset() / 60;
     const hours = valueDate.getHours();
-
     valueDate.setHours(hours - offset);
 
     const current = new Date();

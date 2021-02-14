@@ -14,8 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getUser(): Observable<IProfileInfo> {
-    return this.http.get<IProfileInfo>('/profiles');
+  getUser(username: string): Observable<IProfileInfo> {
+    return this.http.get<IProfileInfo>(`/profiles?username=${username}`);
   }
 
   login(data: ILogin): Observable<any> {

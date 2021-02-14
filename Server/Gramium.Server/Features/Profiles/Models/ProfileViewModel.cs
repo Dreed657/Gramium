@@ -16,7 +16,9 @@ namespace Gramium.Server.Features.Profiles.Models
 
         public string ProfileImageUrl { get; set; }
 
-        public int Posts { get; set; }
+        public int PostsCount { get; set; }
+
+        public ICollection<PostViewModel> Posts { get; set; }
 
         public int Followers { get; set; }
 
