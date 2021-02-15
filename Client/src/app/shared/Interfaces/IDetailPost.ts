@@ -8,7 +8,7 @@ export interface IDetailPost {
     content: string;
     createdOn: Date;
     commentsCount: number;
-    comments: IComment;
+    comments: IComment[];
     likes: number;
     isLiked: boolean;
 }

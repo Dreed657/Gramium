@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { IPost } from 'src/app/shared/Interfaces/IPost';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDetailPost } from 'src/app/shared/Interfaces/IDetailPost';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommentService } from './../../comment/comment.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -11,11 +13,23 @@ import { IDetailPost } from 'src/app/shared/Interfaces/IDetailPost';
 })
 export class PostDetailComponent implements OnInit {
 
+  commentForm: FormGroup;
+
   post!: IDetailPost;
 
   isPostLoading = false;
+  isCommentSending = false;
 
-  constructor(private route: ActivatedRoute, private postService: PostsService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private postService: PostsService,
+    private commentService: CommentService,
+    private router: Router,
+    private fb: FormBuilder) {
+      this.commentForm = this.fb.group({
+        content: ['', [Validators.required]]
+      });
+   }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params.postId;
@@ -58,4 +72,26 @@ export class PostDetailComponent implements OnInit {
     this.post.likes--;
   }
 
+  commentSubmitHandler(): void {
+    const data = this.commentForm.value;
+    this.isCommentSending = true;
+
+    data.postId = this.post.id;
+
+    this.commentService.create(data).subscribe({
+      next: (res) => {
+        this.isCommentSending = false;
+        this.commentForm.reset();
+
+        this.post.comments.push(res);
+        this.post.commentsCount++;
+      },
+      error: (err) => {
+        // TODO: ADD TOASTER ERROR
+
+        this.isCommentSending = false;
+        console.error(err);
+      }
+    });
+  }
 }

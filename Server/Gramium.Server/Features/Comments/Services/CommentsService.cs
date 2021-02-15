@@ -19,20 +19,20 @@ namespace Gramium.Server.Features.Comments.Services
             this.db = db;
         }
 
-        public async Task<Result> Create(CreateCommentInputModel model, string userId)
+        public async Task<CommentViewModel> Create(CreateCommentInputModel model, string userId)
         {
             var user = await this.db.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null)
             {
-                return "User does not exists!";
+                throw new InvalidOperationException("User does not exists!");
             }
 
             var post = await this.db.Posts.FirstOrDefaultAsync(x => x.Id == model.postId);
 
             if (post == null)
             {
-                return "Post does not exists!";
+                throw new InvalidOperationException("Post does not exists!");
             }
 
             var commentEntity = new Comment()
@@ -45,7 +45,14 @@ namespace Gramium.Server.Features.Comments.Services
             await this.db.Comments.AddAsync(commentEntity);
             await this.db.SaveChangesAsync();
 
-            return true;
+            // TODO: A FUCKING AUTO MAPPER
+            // TODO: REFACTOR MEEEE
+            return new CommentViewModel() 
+            { 
+                Content = commentEntity.Content,
+                CreatedAt = commentEntity.CreatedOn,
+                UserName = commentEntity.User.UserName,
+            };
         }
 
         public async Task<Result> Update(int commentId, UpdateCommentInputModel model)

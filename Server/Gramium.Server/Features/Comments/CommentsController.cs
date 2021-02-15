@@ -59,14 +59,19 @@ namespace Gramium.Server.Features.Comments
         [HttpPost]
         public async Task<IActionResult> Create(CreateCommentInputModel model)
         {
-            var result = await this.comments.Create(model, this.currentUser.GetId());
+            //TODO: REFACTOR
+            CommentViewModel result;
 
-            if (result.Failure)
+            try
             {
-                return BadRequest(result.Error);
+                result = await this.comments.Create(model, this.currentUser.GetId());
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(new { error = e.Message });
             }
             
-            return Ok();
+            return Ok(result);
         }
 
         [HttpPut]

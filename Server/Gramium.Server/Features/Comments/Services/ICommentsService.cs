@@ -7,7 +7,7 @@ namespace Gramium.Server.Features.Comments.Services
 {
     public interface ICommentsService
     {
-        Task<Result> Create(CreateCommentInputModel model, string userId);
+        Task<CommentViewModel> Create(CreateCommentInputModel model, string userId);
 
         Task<Result> Update(int commentId, UpdateCommentInputModel model);
 

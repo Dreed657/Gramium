@@ -30,7 +30,7 @@ export class TimeDiffPipe implements PipeTransform {
       return formatDate(elapsed, 'ss', this.locale) + ' seconds ago';
     }
     if (elapsed < msPerHour) {
-      return formatDate(elapsed, 'mm', this.locale) + ' minutes ago';
+      return formatDate(elapsed, 'M', this.locale) + ' minutes ago';
     }
     if (elapsed < msPerDay) {
       return formatDate(elapsed, 'H', this.locale) + ' hours ago';

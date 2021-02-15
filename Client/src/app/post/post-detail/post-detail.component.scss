@@ -32,3 +32,13 @@ div.controls {
         }
     }
 }
+
+div.comment-section {
+    div.comment {
+        border-left: 1px solid gray;
+        padding-left: 10px;
+        p {
+            padding-left: 25px;
+        }
+    }
+}

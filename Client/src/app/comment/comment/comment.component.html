@@ -1,0 +1,8 @@
+<div class="comment">
+    <h4>
+        <a [routerLink]="['/profile/', comment.userName]">{{comment.userName}}</a> | 
+        {{comment.createdAt | timeDiffToString }}
+    </h4>
+    <p>{{comment.content}}</p>
+    <hr class="w-75">
+</div>

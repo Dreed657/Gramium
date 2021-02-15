@@ -12,6 +12,7 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostProfileComponent } from './post-profile/post-profile.component';
 import { RouterModule } from '@angular/router';
 import { PostCreateComponent } from './post-create/post-create.component';
+import { CommentModule } from '../comment/comment.module';
 
 const DIcontainer = [PostComponent, PostListingComponent, PostDetailComponent, PostProfileComponent, PostCreateComponent];
 
@@ -25,7 +26,8 @@ const DIcontainer = [PostComponent, PostListingComponent, PostDetailComponent, P
     ReactiveFormsModule,
     CardsModule,
     WavesModule,
-    ButtonsModule
+    ButtonsModule,
+    CommentModule
   ],
   exports: [DIcontainer],
 })
