@@ -1,12 +1,5 @@
-import { IPost } from './IPost';
-
-export interface IProfileInfo {
-    firstName: string;
-    lastName: string;
-    userName: string;
+export default interface IUser {
+    id: string;
     profileImageUrl: string;
-    postsCount: number;
-    posts: IPost[];
-    followers: number;
-    following: number;
+    username: string;
 }

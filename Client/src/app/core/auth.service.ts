@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ILogin, IRegister } from '../shared/Interfaces/AUTH';
-import { IProfileInfo } from '../shared/Interfaces/IUser';
+import { IProfileInfo } from '../shared/Interfaces/IProfileInfo';
+import { IGlobalState } from './../+store/reducers';
+import { login, logout } from './../+store/actions';
+import { Store } from '@ngrx/store';
+import { IAuthenticate } from '../shared/Interfaces/AUTH/IAuthenticate';
+import { tap, map } from 'rxjs/operators';
 
 const tokenKey = 'token';
 
@@ -12,14 +17,20 @@ const tokenKey = 'token';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  currentUser$ = this.store.select((state) => state.currentUser);
+
+  constructor(private http: HttpClient, private router: Router, private store: Store<IGlobalState>) {}
 
   getUser(username: string): Observable<IProfileInfo> {
     return this.http.get<IProfileInfo>(`/profiles?username=${username}`);
   }
 
-  login(data: ILogin): Observable<any> {
-    return this.http.post('/identity/login', data);
+  login(data: ILogin): Observable<IAuthenticate> {
+    return this.http.post<IAuthenticate>('/identity/login', data).pipe(
+      tap((res: IAuthenticate) => {
+        this.store.dispatch(login(res));
+      })
+    );
   }
 
   register(data: IRegister): Observable<any> {
@@ -27,22 +38,23 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(tokenKey);
+    this.store.dispatch(logout());
     this.router.navigate(['login']);
   }
 
-  saveToken(token: string): void {
-    localStorage.setItem(tokenKey, token);
-  }
+  // ##Deprecated
+  // saveToken(token: string): void {
+  //   localStorage.setItem(tokenKey, token);
+  // }
 
-  getToken(): string | null {
-    return localStorage.getItem(tokenKey);
-  }
+  // getToken(): string | null {
+  //   return localStorage.getItem(tokenKey);
+  // }
 
-  isAuthenticated(): boolean {
-      if (this.getToken()) {
-        return true;
-      }
-      return false;
-  }
+  // isAuthenticated(): boolean {
+  //   if (this.getToken()) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 }

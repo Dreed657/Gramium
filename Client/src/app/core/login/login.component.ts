@@ -26,9 +26,7 @@ export class LoginComponent {
 
     this.authService.login(data).subscribe({
       next: (res) => {
-        this.isLoading = false;
-        this.authService.saveToken(res.token);
-        this.router.navigate(['']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.isLoading = false;
