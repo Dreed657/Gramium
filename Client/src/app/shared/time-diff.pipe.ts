@@ -6,42 +6,45 @@ import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 })
 export class TimeDiffPipe implements PipeTransform {
 
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
+  constructor(@Inject(LOCALE_ID) private locale: string) { }
 
   transform(value: Date): string {
-    // const locale = 'en';
+    const span = new Date(+new Date().getUTCDate() - +new Date(value));
 
-    const msPerMinute = 60 * 1000;
-    const msPerHour = msPerMinute * 60;
-    const msPerDay = msPerHour * 24;
-    const msPerMonth = msPerDay * 30;
-    const msPerYear = msPerMonth * 365;
+    if (span.getDay() > 365) {
+      let years = span.getDay() / 365;
 
-    // Angular compiler wont parse date correctly.... (quick fix)
-    const valueDate = new Date(value);
-    const offset = valueDate.getTimezoneOffset() / 60;
-    const hours = valueDate.getHours();
-    valueDate.setHours(hours - offset);
+      if (span.getDay() % 365 !== 0) {
+        years += 1;
+      }
 
-    const current = new Date();
-    const elapsed = +current - +valueDate;
+      return `${years} years ago`;
+    }
+    else if (span.getDay() > 30) {
+      let months = span.getDay() / 30;
 
-    if (elapsed < msPerMinute) {
-      return formatDate(elapsed, 'ss', this.locale) + ' seconds ago';
+      if (span.getDay() % 31 !== 0) {
+        months += 1;
+      }
+      return `${months} months ago`;
     }
-    if (elapsed < msPerHour) {
-      return formatDate(elapsed, 'M', this.locale) + ' minutes ago';
+    else if (span.getDay() > 0) {
+      return `${span.getDay()} days ago`;
     }
-    if (elapsed < msPerDay) {
-      return formatDate(elapsed, 'H', this.locale) + ' hours ago';
+    else if (span.getHours() > 0) {
+      return `${span.getHours()} hours ago`;
     }
-    if (elapsed < msPerMonth) {
-      return formatDate(elapsed, 'd', this.locale) + ' days ago';
+    else if (span.getMinutes() > 0) {
+      return `${span.getMinutes()} minutes ago`;
     }
-    if (elapsed < msPerYear) {
-      return formatDate(elapsed, 'M', this.locale) + ' months ago';
+    else if (span.getSeconds() > 5) {
+      return `${span.getSeconds()} seconds ago`;
     }
-    return formatDate(elapsed, 'y', this.locale) + ' years ago';
+    else if (span.getSeconds() <= 5) {
+      return `just now`;
+    }
+
+    return '';
   }
 
 }

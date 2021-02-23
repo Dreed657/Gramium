@@ -13,6 +13,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './+store';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +34,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CoreModule,
     PostModule,
     SharedModule,
+    StoreModule.forRoot(reducers),
+    environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

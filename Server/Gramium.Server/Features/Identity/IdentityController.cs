@@ -71,8 +71,23 @@ namespace Gramium.Server.Features.Identity
 
             return new LoginResponseModel
             {
-                Token = token
+                Token = token,
+                User = new AuthenticateViewModel() 
+                {
+                    id = user.Id,
+                    username = user.UserName,
+                    profileImageUrl =  user.ProfileImage
+                }
             };
+        }
+
+        [HttpGet("authenticate")]
+        [Authorize]
+        public IActionResult Authenticate()
+        {
+            var userData = this.identity.Authenticate();
+
+            return Ok(userData);
         }
     }
 }

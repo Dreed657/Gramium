@@ -1,4 +1,3 @@
-import { AuthService } from './auth.service';
 import { Injectable, Provider } from '@angular/core';
 import {
   HttpRequest,
@@ -8,31 +7,37 @@ import {
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { first, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Store } from '@ngrx/store';
+import { IRootState } from './../+store/index';
 
 const apiURL = environment.ApiUrl;
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) { }
+  constructor(private store: Store<IRootState>) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!req.url.includes('http')) {
       req = req.clone({
         url: `${apiURL}${req.url}`,
       });
+    } else {
+      return next.handle(req);
     }
 
-    if (req.url.includes(apiURL) && this.authService.isAuthenticated) {
-      req = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.authService.getToken()}`
-        }
-      });
-    }
+    return this.store.select(state => state.global.token).pipe(
+      first(),
+      mergeMap(token => {
+        const authReq = !!token ? req.clone({
+          setHeaders: { Authorization: `Bearer ${token}`}
+        }) : req;
 
-    return next.handle(req);
+        return next.handle(authReq);
+      }),
+    );
   }
 }
 

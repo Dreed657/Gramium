@@ -1,7 +1,7 @@
 import { PostsService } from './../post/posts.service';
 import { AuthService } from './../core/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { IProfileInfo } from '../shared/Interfaces/IUser';
+import { IProfileInfo } from '../shared/Interfaces/IProfileInfo';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
