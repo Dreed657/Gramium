@@ -7,17 +7,17 @@ import {
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { first, mergeMap, tap, map } from 'rxjs/operators';
+import { first, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IGlobalState } from '../+store/reducers';
 import { Store } from '@ngrx/store';
+import { IRootState } from './../+store/index';
 
 const apiURL = environment.ApiUrl;
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
 
-  constructor(private store: Store<IGlobalState>) {}
+  constructor(private store: Store<IRootState>) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!req.url.includes('http')) {
@@ -28,10 +28,9 @@ export class AppInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    return this.store.select((state) => state.token).pipe(
+    return this.store.select(state => state.global.token).pipe(
       first(),
       mergeMap(token => {
-        console.log(token);
         const authReq = !!token ? req.clone({
           setHeaders: { Authorization: `Bearer ${token}`}
         }) : req;

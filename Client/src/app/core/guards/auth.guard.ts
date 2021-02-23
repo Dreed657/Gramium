@@ -9,24 +9,18 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
 
-
   constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(): boolean {
-    return true;
+  canActivate(): Observable<boolean> {
+    return this.authService.currentUser$.pipe(
+      map((user) => {
+        console.log(user);
+        if (!user){
+          this.router.navigate(['login']);
+          return false;
+        }
+        return true;
+      }),
+    );
   }
-
-  // canActivate(): Observable<boolean> {
-  //   return this.authService.currentUser$.pipe(
-  //     map((user) => {
-  //       return !!user;
-  //     }),
-  //     tap((canContinue) => {
-  //       if (canContinue) { return; }
-  //       const url = this.router.url;
-  //       this.router.navigateByUrl(url);
-  //     }),
-  //     first()
-  //   );
-  // }
 }

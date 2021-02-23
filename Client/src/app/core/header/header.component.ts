@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  currentUser$ = this.authService.currentUser$;
+
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {}
