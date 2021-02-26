@@ -25,6 +25,10 @@ export class ProfileComponent implements OnInit {
       next: (res) => {
         this.isInfoLoading = false;
         this.profileInfo = res;
+
+        if (this.profileInfo.profileImageUrl == null) {
+          this.profileInfo.profileImageUrl = '/assets/default-profile.jpg';
+        }
       },
       error: (err) => {
         this.isInfoLoading = false;

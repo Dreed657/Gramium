@@ -38,6 +38,7 @@ namespace Gramium.Server.Features.Profiles.Services
                         ImageUrl = p.ImageUrl,
                         Likes = p.Likes.Count,
                         Comments = p.Comments.Count,
+                        CreatedAt = p.CreatedOn,
                         isLiked = p.Likes
                             .Where(y => !y.IsDeleted)
                             .Any(y => y.UserId == this.currentUser.GetId())

@@ -91,6 +91,7 @@ namespace Gramium.Server.Features.Posts.Services
         {
             return await this.db
                 .Posts
+                .OrderByDescending(x => x.CreatedOn)
                 .Select(x => new PostViewModel()
                 {
                     Id = x.Id,
