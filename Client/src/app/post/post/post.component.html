@@ -1,25 +1,13 @@
-<mdb-card> 
-    <div class="view view-cascade overlay waves-light" mdbWavesEffect>
-        <!-- Card img -->
-        <mdb-card-img
-            src="{{post?.imageUrl}}"
-            alt="Card image cap"></mdb-card-img>
-        <a>
-            <div class="mask rgba-white-slight"></div>
-        </a>
+<div class="card text-center my-4">
+    <div class="card-header">
+        <div>
+            <a [routerLink]="['/profile/', post.userName]">{{post.userName}}</a>
+        </div>
     </div>
-    <!--Card content-->
-    <mdb-card-body class="text-center">
-        <!--Title-->
-        <mdb-card-title>
-            <h4>{{post?.id}}</h4>
-        </mdb-card-title>
-
-        <!--Text-->
-        <mdb-card-text> 
-            {{post?.content}}
-        </mdb-card-text>
-
-        <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a>
-    </mdb-card-body>
-</mdb-card>
+    <div class="card-body p-0">
+        <img src="{{post?.imageUrl}}" alt="random post img">
+    </div>
+    <div class="card-footer text-muted">
+        <p>{{post.createdAt | timeDiffToString}}</p>
+    </div>
+</div>
