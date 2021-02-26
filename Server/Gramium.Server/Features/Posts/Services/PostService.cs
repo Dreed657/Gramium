@@ -94,10 +94,12 @@ namespace Gramium.Server.Features.Posts.Services
                 .Select(x => new PostViewModel()
                 {
                     Id = x.Id,
+                    UserName = x.User.UserName,
                     Content = x.Content,
                     ImageUrl = x.ImageUrl,
                     Likes = x.Likes.Count(y => !y.IsDeleted),
                     Comments = x.Comments.Count(y => !y.IsDeleted),
+                    CreatedAt = x.CreatedOn,
                     isLiked = x.Likes
                         .Where(y => !y.IsDeleted)
                         .Any(y => y.UserId == this.currentUser.GetId()),
