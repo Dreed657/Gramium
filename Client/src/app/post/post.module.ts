@@ -7,14 +7,13 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 
 import { PostComponent } from './post/post.component';
-import { PostListingComponent } from './post-listing/post-listing.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostProfileComponent } from './post-profile/post-profile.component';
 import { RouterModule } from '@angular/router';
 import { PostCreateComponent } from './post-create/post-create.component';
 import { CommentModule } from '../comment/comment.module';
 
-const DIcontainer = [PostComponent, PostListingComponent, PostDetailComponent, PostProfileComponent, PostCreateComponent];
+const DIcontainer = [PostComponent, PostDetailComponent, PostProfileComponent, PostCreateComponent];
 
 @NgModule({
   declarations: [DIcontainer],

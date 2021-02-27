@@ -1,5 +1,6 @@
 <app-header></app-header>
 
-<div class="container">
-    <app-post-listing></app-post-listing>
+<div class="container" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="100" (scrolled)="onScroll()">
+    <app-loader [isLoading]="!!!posts"></app-loader>
+    <app-post *ngFor="let post of posts" [post]="post"></app-post>
 </div>

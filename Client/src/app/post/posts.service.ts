@@ -17,8 +17,12 @@ export class PostsService {
   }
 
   getAll(): Observable<IPost[]> {
-    return this.http.get<IPost[]>('/posts');
+    return this.http.get<IPost[]>(`/posts`);
   }
+
+  // getAllPaged(count: number, pageNumber: number, size: number): Observable<IPost[]> {
+  //   return this.http.get<IPost[]>(`/posts?count=${count}&pageNumber=${pageNumber}&size=${size}`);
+  // }
 
   getPost(id: number): Observable<IDetailPost> {
     return this.http.get<IDetailPost>(`/posts/${id}`);
