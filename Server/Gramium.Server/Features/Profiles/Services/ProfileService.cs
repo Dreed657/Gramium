@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Gramium.Server.Data;
 using Gramium.Server.Features.Posts.Models;
@@ -23,7 +24,12 @@ namespace Gramium.Server.Features.Profiles.Services
         {
             var user = await this.db
                 .Users
+                .Include(x => x.Followers)
+                .Include(x => x.Following)
                 .Include(x => x.Posts)
+                .ThenInclude(post => post.Likes)
+                .Include(x => x.Posts)
+                .ThenInclude(post => post.Comments)
                 .Where(x => x.UserName == username)
                 .FirstOrDefaultAsync();
 
@@ -34,6 +40,7 @@ namespace Gramium.Server.Features.Profiles.Services
 
             return new ProfileViewModel()
             {
+                Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 UserName = user.UserName,

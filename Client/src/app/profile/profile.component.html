@@ -20,10 +20,10 @@
                         <button class="btn btn-primary">Edit Profile</button>
                     </div>
                     <div *ngIf="profileInfo.isFollowing == false && profileInfo.isFollowing != null" class="col">
-                        <button class="btn btn-warning">Follow</button>
+                        <button (click)="FollowHandler()" class="btn btn-warning">Follow</button>
                     </div>
                     <div *ngIf="profileInfo.isFollowing == true && profileInfo.isFollowing != null"class="col">
-                        <button class="btn btn-danger">UnFollow</button>
+                        <button (click)="unFollowHandler()" class="btn btn-danger">UnFollow</button>
                     </div>
                 </div>
                 <div class="row info-row">

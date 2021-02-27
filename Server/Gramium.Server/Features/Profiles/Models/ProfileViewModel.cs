@@ -6,6 +6,8 @@ namespace Gramium.Server.Features.Profiles.Models
 {
     public class ProfileViewModel
     {
+        public string Id { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

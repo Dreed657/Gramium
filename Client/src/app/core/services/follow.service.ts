@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +7,13 @@ import { Injectable } from '@angular/core';
 })
 export class FollowService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  follow(userId: string): Observable<any> {
+    return this.http.post('/follows', { userId });
+  }
+
+  unFollow(userId: string): Observable<any> {
+    return this.http.put('/follows', { userId });
+  }
 }

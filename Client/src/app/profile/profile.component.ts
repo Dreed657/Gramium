@@ -1,3 +1,4 @@
+import { FollowService } from './../core/services/follow.service';
 import { AuthService } from './../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { IProfileInfo } from '../shared/Interfaces/IProfileInfo';
@@ -14,7 +15,11 @@ export class ProfileComponent implements OnInit {
 
   isInfoLoading = false;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private followService: FollowService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     const username = this.route.snapshot.params.username;
@@ -36,6 +41,28 @@ export class ProfileComponent implements OnInit {
         if (err.status === 404) {
           this.router.navigate([`pagenotfound`]);
         }
+      }
+    });
+  }
+
+  FollowHandler(): void {
+    this.followService.follow(this.profileInfo.id).subscribe({
+      next: () => {
+        this.profileInfo.isFollowing = !this.profileInfo.isFollowing;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  unFollowHandler(): void {
+    this.followService.unFollow(this.profileInfo.id).subscribe({
+      next: () => {
+        this.profileInfo.isFollowing = !this.profileInfo.isFollowing;
+      },
+      error: (err) => {
+        console.log(err);
       }
     });
   }

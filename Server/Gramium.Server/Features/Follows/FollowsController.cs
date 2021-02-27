@@ -31,7 +31,7 @@ namespace Gramium.Server.Features.Follows
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpPut]
         public async Task<ActionResult> UnFollow(UnFollowInputModel model)
         {
             var result = await this.follow.UnFollow(model.userId, this.currentUser.GetId());

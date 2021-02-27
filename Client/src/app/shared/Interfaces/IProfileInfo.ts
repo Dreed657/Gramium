@@ -1,6 +1,7 @@
 import { IPost } from './IPost';
 
 export interface IProfileInfo {
+    id: string;
     firstName: string;
     lastName: string;
     userName: string;
