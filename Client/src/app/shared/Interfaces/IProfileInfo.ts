@@ -9,4 +9,5 @@ export interface IProfileInfo {
     posts: IPost[];
     followers: number;
     following: number;
+    isFollowing: boolean | null;
 }
