@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ILogin, IRegister } from '../shared/Interfaces/AUTH';
-import { IProfileInfo } from '../shared/Interfaces/IProfileInfo';
-import { IGlobalState } from './../+store/reducers';
-import { login, logout } from './../+store/actions';
+import { ILogin, IRegister } from '../../shared/Interfaces/AUTH';
+import { IProfileInfo } from '../../shared/Interfaces/IProfileInfo';
+import { login, logout } from './../../+store/actions';
 import { Store } from '@ngrx/store';
-import { IAuthenticate } from '../shared/Interfaces/AUTH/IAuthenticate';
+import { IAuthenticate } from '../../shared/Interfaces/AUTH/IAuthenticate';
 import { tap, map } from 'rxjs/operators';
-import { IRootState } from './../+store/index';
+import { IRootState } from '../../+store/index';
 
 const tokenKey = 'token';
 
