@@ -23,5 +23,7 @@ namespace Gramium.Server.Features.Profiles.Models
         public int Followers { get; set; }
 
         public int Following { get; set; }
+
+        public bool? IsFollowing { get; set; }
     }
 }

@@ -21,32 +21,45 @@ namespace Gramium.Server.Features.Profiles.Services
         
         public async Task<ProfileViewModel> GetProfile(string username)
         {
-            return await this.db
+            var user = await this.db
                 .Users
+                .Include(x => x.Posts)
                 .Where(x => x.UserName == username)
-                .Select(x => new ProfileViewModel()
-                {
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    UserName = x.UserName,
-                    Gender = x.Gender,
-                    ProfileImageUrl = x.ProfileImage,
-                    PostsCount = x.Posts.Count,
-                    Posts = x.Posts.Select(p => new PostViewModel() { 
-                        Id = p.Id,
-                        Content = p.Content,
-                        ImageUrl = p.ImageUrl,
-                        Likes = p.Likes.Count,
-                        Comments = p.Comments.Count,
-                        CreatedAt = p.CreatedOn,
-                        isLiked = p.Likes
-                            .Where(y => !y.IsDeleted)
-                            .Any(y => y.UserId == this.currentUser.GetId())
-                    }).ToList(),
-                    Followers = x.Followers.Count,
-                    Following = x.Following.Count,
-                })
                 .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new ProfileViewModel()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                UserName = user.UserName,
+                Gender = user.Gender,
+                ProfileImageUrl = user.ProfileImage,
+                PostsCount = user.Posts.Count,
+                Posts = user.Posts.Select(p => new PostViewModel()
+                {
+                    Id = p.Id,
+                    Content = p.Content,
+                    ImageUrl = p.ImageUrl,
+                    Likes = p.Likes.Count,
+                    Comments = p.Comments.Count,
+                    CreatedAt = p.CreatedOn,
+                    isLiked = p.Likes
+                        .Where(y => !y.IsDeleted)
+                        .Any(y => y.UserId == this.currentUser.GetId())
+                }).ToList(),
+                Followers = user.Followers.Count,
+                Following = user.Following.Count,
+                IsFollowing = user.Id == this.currentUser.GetId()
+                    ? null
+                    : user.Followers
+                        .Where(u => !u.IsDeleted)
+                        .Any(u => u.FollowerId == this.currentUser.GetId())
+            };
         }
     }
 }
