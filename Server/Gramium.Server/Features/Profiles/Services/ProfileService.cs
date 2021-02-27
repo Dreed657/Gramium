@@ -20,6 +20,7 @@ namespace Gramium.Server.Features.Profiles.Services
             this.currentUser = currentUser;
         }
         
+        // TODO: REFACTOR
         public async Task<ProfileViewModel> GetProfile(string username)
         {
             var user = await this.db

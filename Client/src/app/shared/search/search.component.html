@@ -1,0 +1,9 @@
+<form [formGroup]="form" (ngSubmit)="onChangeHandler()" class="form-inline waves-light" mdbWavesEffect>
+    <div class="md-form my-2">
+        <input class="form-control mr-sm-2" type="search"
+            formControlName="searchQuery" placeholder="Search text">
+    </div>
+</form>
+<ul *ngIf="results.length > 0" class="search-results">
+    <li *ngFor="let data of results">{{data}}</li>
+</ul>
