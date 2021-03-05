@@ -35,7 +35,8 @@ namespace Gramium.Server.Features.Identity
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                UserName = model.UserName
+                UserName = model.UserName,
+                ProfileImage = "https://i.imgur.com/r3hNeIk.jpg"
             };
 
             var result = await this.userManager.CreateAsync(user, model.Password);
