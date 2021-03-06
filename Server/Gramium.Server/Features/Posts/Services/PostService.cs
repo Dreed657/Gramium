@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Gramium.Server.Data;
 using Gramium.Server.Data.Models;
 using Gramium.Server.Features.Comments.Models;
+using Gramium.Server.Features.Identity.Models;
 using Gramium.Server.Features.Likes.Services;
 using Gramium.Server.Features.Posts.Models;
 using Gramium.Server.Infrastructure.Services;
@@ -95,7 +96,12 @@ namespace Gramium.Server.Features.Posts.Services
                 .Select(x => new PostViewModel()
                 {
                     Id = x.Id,
-                    UserName = x.User.UserName,
+                    User = new ShortUserViewModel()
+                    {
+                        Id = x.UserId,
+                        Username = x.User.UserName,
+                        ProfileImageUrl = x.User.ProfileImage,
+                    },
                     Content = x.Content,
                     ImageUrl = x.ImageUrl,
                     Likes = x.Likes.Count(y => !y.IsDeleted),

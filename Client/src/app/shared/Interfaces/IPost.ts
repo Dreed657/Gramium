@@ -1,6 +1,8 @@
+import IUser from './IUser';
+
 export interface IPost {
     id: number;
-    userName: string;
+    user: IUser;
     content: string;
     imageUrl: string;
     createdAt: Date;

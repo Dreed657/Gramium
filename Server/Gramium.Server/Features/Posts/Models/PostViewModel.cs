@@ -1,4 +1,5 @@
 ﻿using System;
+using Gramium.Server.Features.Identity.Models;
 
 namespace Gramium.Server.Features.Posts.Models
 {
@@ -6,7 +7,7 @@ namespace Gramium.Server.Features.Posts.Models
     {
         public int Id { get; set; }
 
-        public string UserName { get; set; }
+        public ShortUserViewModel User { get; set; }
 
         public string Content { get; set; }
 
