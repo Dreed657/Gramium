@@ -1,51 +1,107 @@
 <!-- Default form register -->
 <div class="container mt-5">
-    <form [formGroup]=form (ngSubmit)="submitHandler()" class="text-center border border-light p-5">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submitHandler()"
+    class="text-center border border-light p-5"
+  >
+    <p class="h4 mb-4">Sign up</p>
 
-        <p class="h4 mb-4">Sign up</p>
+    <div class="form-row mb-4">
+      <div class="col">
+        <!-- Username -->
+        <input
+          type="text"
+          formControlName="username"
+          id="defaultRegisterFormUserName"
+          class="form-control"
+          placeholder="Username"
+        />
+      </div>
+      <div class="col">
+        <!-- First name -->
+        <input
+          type="text"
+          formControlName="firstname"
+          id="defaultRegisterFormFirstName"
+          class="form-control"
+          placeholder="First name"
+        />
+      </div>
+      <div class="col">
+        <!-- Last name -->
+        <input
+          type="text"
+          formControlName="lastname"
+          id="defaultRegisterFormLastName"
+          class="form-control"
+          placeholder="Last name"
+        />
+      </div>
+    </div>
 
-        <div class="form-row mb-4">
-            <div class="col">
-                <!-- Username -->
-                <input type="text" formControlName="username" id="defaultRegisterFormFirstName"
-                    class="form-control" placeholder="Username">
-            </div>
-            <div class="col">
-                <!-- First name -->
-                <input type="text" formControlName="firstname" id="defaultRegisterFormFirstName"
-                    class="form-control" placeholder="First name">
-            </div>
-            <div class="col">
-                <!-- Last name -->
-                <input type="text" formControlName="lastname" id="defaultRegisterFormLastName"
-                    class="form-control" placeholder="Last name">
-            </div>
-        </div>
+    <!-- E-mail -->
+    <div class="form-group mb-4">
+      <input
+        type="email"
+        formControlName="email"
+        id="defaultRegisterFormEmail"
+        [class.border-danger]="form.get('email')?.touched && form.get('email')?.invalid"
+        class="form-control mb-1"
+        placeholder="E-mail"
+      />
+      <small
+        *ngIf="
+          form.get('email')?.invalid &&
+          (form.get('email')?.dirty || form.get('email')?.touched)
+        "
+        id="defaultRegisterFormEmailHelpBlock"
+        class="form-text text-danger"
+      >
+        Email is required
+      </small>
+    </div>
 
-        <!-- E-mail -->
-        <input type="email" formControlName="email" id="defaultRegisterFormEmail" class="form-control
-            mb-4" placeholder="E-mail">
+    <!-- Password -->
+    <input
+      type="password"
+      formControlName="password"
+      id="defaultRegisterFormPassword"
+      [class.border-danger]="form.get('password')?.touched && form.get('password')?.invalid"
+      class="form-control"
+      placeholder="Password"
+      aria-describedby="defaultRegisterFormPasswordHelpBlock"
+    />
+    <small
+      *ngIf="
+        form.get('password')?.invalid &&
+        (form.get('password')?.dirty || form.get('password')?.touched)
+      "
+      id="defaultRegisterFormPasswordHelpBlock"
+      class="form-text text-danger mb-4"
+    >
+      At least 6 characters and 1 digit
+    </small>
 
-        <!-- Password -->
-        <input type="password" formControlName="password" id="defaultRegisterFormPassword"
-            class="form-control" placeholder="Password"
-            aria-describedby="defaultRegisterFormPasswordHelpBlock">
-        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text
-            text-muted mb-4">
-            At least 8 characters and 1 digit
-        </small>
+    <!-- Sign up button -->
+    <button
+      class="my-4 btn btn-primary"
+      type="submit"
+      [disabled]="isLoading || form.invalid"
+    >
+      Sign up
+    </button>
+    <app-loader [isLoading]="isLoading"></app-loader>
 
-        <!-- Sign up button -->
-        <button mdbBtn color="info" class="my-4" type="submit" [disabled]="isLoading || form.invalid">Sign up</button>
-        <app-loader [isLoading]=isLoading></app-loader>
+    <p>
+      Or you already have an account? <a [routerLink]="['/login']">Login?</a>
+    </p>
+    <hr />
 
-        <p>Or you already have an account? <a [routerLink]="['/login']">Login?</a></p>
-        <hr>
-
-        <!-- Terms of service -->
-        <p>By clicking
-            <em>Sign up</em> you agree to our
-            <a href="" target="_blank">terms of service</a></p>
-
-    </form>
+    <!-- Terms of service -->
+    <p>
+      By clicking <em>Sign up</em> you agree to our
+      <a href="" target="_blank">terms of service</a>
+    </p>
+  </form>
 </div>

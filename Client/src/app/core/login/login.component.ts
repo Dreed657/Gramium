@@ -33,6 +33,7 @@ export class LoginComponent {
       error: (err) => {
         this.isLoading = false;
         console.error(err);
+        this.toastr.error('Invalid username or password!');
       }
     });
   }
