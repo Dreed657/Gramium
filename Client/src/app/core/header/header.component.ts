@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,11 +11,12 @@ export class HeaderComponent implements OnInit {
 
   currentUser$ = this.authService.currentUser$;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {}
 
   logoutHandler(): void {
     this.authService.logout();
+    this.toastr.success('Good bye!', 'Logout success');
   }
 }

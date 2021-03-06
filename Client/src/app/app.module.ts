@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { FeedComponent } from './feed/feed.component';
@@ -37,6 +38,7 @@ import { reducers } from './+store';
     CoreModule,
     PostModule,
     SharedModule,
+    ToastrModule.forRoot(),
     StoreModule.forRoot(reducers),
     environment.production ? [] : StoreDevtoolsModule.instrument()
   ],

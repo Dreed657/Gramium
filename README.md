@@ -13,8 +13,10 @@ Instagram clone (work in progress as always)
 
 #### Front-End
 - Typescript
-- Angular 11
+- Angular
 - NgRx
+- rxJs
+- ngx-Toastr
 - HTML
 - CSS
 - MDBoostrap
