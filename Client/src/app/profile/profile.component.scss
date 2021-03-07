@@ -1,19 +1,39 @@
 div.profile-header {
-    margin-top: 20px;
-    div.first-row {
-        justify-content: center;
-        align-items: center;
-    }
-    div.info-row {
-        text-align: center;
-    }
-    img.profile-image {
-        width: 125px;
-        height: 125px;
-    }
+  margin-top: 20px;
+  div.first-row {
+    justify-content: center;
+    align-items: center;
+  }
+  div.info-row {
+    text-align: center;
+  }
+  img.profile-image {
+    width: 125px;
+    height: 125px;
+  }
 }
 div.cards {
-    display: grid;
+  display: grid;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 1024px) {
+  div.cards {
     grid-gap: 50px;
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 731px) and (max-width: 1020px) {
+  div.cards {
+    grid-gap: 25px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 730px) {
+  div.cards {
+    grid-gap: 25px;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
