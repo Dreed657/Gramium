@@ -34,8 +34,6 @@ namespace Gramium.Server
                 .AddApplicationServices()
                 .AddSwagger()
                 .AddApiControllers();
-
-            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,7 +48,9 @@ namespace Gramium.Server
                 .UseCors(options => options
                     .AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowAnyOrigin())
+                    .WithOrigins("http://localhost:4200")
+                    .AllowCredentials()
+                )
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>

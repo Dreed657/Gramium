@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   ApiUrl: 'https://localhost:44355',
-  // ApiUrl: 'https://localhost:5000',
+  messengerHubUrl: 'https://localhost:44355/chat',
 };
 
 /*

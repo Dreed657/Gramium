@@ -20,6 +20,7 @@ import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './+store';
+import { MessengerModule } from './messenger/messenger.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { reducers } from './+store';
     CoreModule,
     PostModule,
     SharedModule,
+    MessengerModule,
     ToastrModule.forRoot(),
     StoreModule.forRoot(reducers),
     environment.production ? [] : StoreDevtoolsModule.instrument()

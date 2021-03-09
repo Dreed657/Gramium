@@ -24,6 +24,12 @@
           <p class="d-inline d-md-inline d-sm-inline d-lg-none">Explore</p>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/chat']">
+          <mdb-icon far icon="paper-plane"></mdb-icon>
+          <p class="d-inline d-md-inline d-sm-inline d-lg-none">DMs</p>
+        </a>
+      </li>
 
       <li *ngIf="currentUser$ | async as user" class="nav-item dropdown"
         dropdown>

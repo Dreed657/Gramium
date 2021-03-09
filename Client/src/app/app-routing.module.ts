@@ -8,6 +8,7 @@ import { FeedComponent } from './feed/feed.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ChatComponent } from './messenger/chat/chat.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
   },
   {
     path: '**',

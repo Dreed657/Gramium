@@ -101,9 +101,13 @@ namespace Gramium.Server.Infrastructure.Extensions
             });
         }
 
-        public static void AddApiControllers(this IServiceCollection services)
+        public static IServiceCollection AddApiControllers(this IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSignalR();
+
+
+            return services;
         }
     }
 }

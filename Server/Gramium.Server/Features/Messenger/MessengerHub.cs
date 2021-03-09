@@ -1,23 +1,27 @@
 ﻿using System.Threading.Tasks;
+using Gramium.Server.Infrastructure.Services;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Gramium.Server.Features.Messenger
 {
     public class MessengerHub : Hub
     {
-        public MessengerHub()
+        private readonly ICurrentUserService currentUser;
+
+        public MessengerHub(ICurrentUserService currentUser)
         {
-            
+            this.currentUser = currentUser;
         }
-        //public async Task JoinChannel(string groupName, string senderId)
-        //{
-        //    await this.Groups.AddToGroupAsync(this.Context.ConnectionId, groupName);
-        //    await this.Clients.Group(groupName).SendAsync("MemberJoined", message, groupName);
-        //}
+
+        public async Task JoinChannel()
+        {
+            var username = this.currentUser.GetUserName();
+            await this.Clients.All.SendAsync("MemberJoined", this.Context.ConnectionId, username);
+        }
 
         public async Task SendMessage(string message)
         {
-            await this.Clients.All.SendAsync("SendAll", message);
+            await this.Clients.All.SendAsync("ReceiveMessage", message);
         }
     }
 }
