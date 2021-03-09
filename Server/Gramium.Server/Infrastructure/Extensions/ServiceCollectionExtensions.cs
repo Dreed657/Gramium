@@ -103,8 +103,7 @@ namespace Gramium.Server.Infrastructure.Extensions
 
         public static void AddApiControllers(this IServiceCollection services)
         {
-            services
-                .AddControllers();
+            services.AddControllers();
         }
     }
 }

@@ -26,4 +26,9 @@
     <None Include="Infrastructure\Filters\ModelOrNotFoundActionFilter.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Messenger\Models\" />
+    <Folder Include="Features\Messenger\Services\" />
+  </ItemGroup>
+
 </Project>

@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gramium.Server.Features.Messenger;
 using Gramium.Server.Infrastructure.Extensions;
 
 namespace Gramium.Server
@@ -33,6 +34,8 @@ namespace Gramium.Server
                 .AddApplicationServices()
                 .AddSwagger()
                 .AddApiControllers();
+
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,6 +56,8 @@ namespace Gramium.Server
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
+                    
+                    endpoints.MapHub<MessengerHub>("/chat");
                 })
                 .ApplyMigrations();
         }
