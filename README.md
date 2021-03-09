@@ -22,6 +22,9 @@ Instagram clone (work in progress as always)
 - MDBoostrap
 - FontAwesome
 
+#### Application current state
+![Short-Gif](https://i.gyazo.com/3f7615708f57719be06cca111e64f02b.gif)
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
