@@ -22,19 +22,6 @@ namespace Gramium.Server.Features.Identity.Services
             this.db = db;
         }
 
-        public AuthenticateViewModel Authenticate()
-        {
-            return this.db
-                .Users
-                .Select(x => new AuthenticateViewModel()
-                {
-                    id = x.Id,
-                    username = x.UserName,
-                    profileImageUrl = x.ProfileImage
-                })
-                .FirstOrDefault(x => x.id == this.currentUser.GetId());
-        }
-
         public string GenerateJwtToken(string userId, string userName, string secret)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -81,14 +81,5 @@ namespace Gramium.Server.Features.Identity
                 }
             };
         }
-
-        [HttpGet("authenticate")]
-        [Authorize]
-        public IActionResult Authenticate()
-        {
-            var userData = this.identity.Authenticate();
-
-            return Ok(userData);
-        }
     }
 }

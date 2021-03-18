@@ -28,18 +28,6 @@ namespace Gramium.Server.Features.Posts
             return await this.posts.GetAllAsync();
         }
 
-        [HttpGet("GetAllPaged")]
-        public async Task<IEnumerable<PostViewModel>> GetAllPaged(int postCount, int pageNumber, int size)
-        {
-            return await this.posts.GetAllAsync();
-        }
-
-        [HttpGet("Mine")]
-        public async Task<IEnumerable<PostViewModel>> Mine()
-        {
-            return await this.posts.ByUserAsync(this.currentUser.GetId());
-        }
-
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<PostDetailViewModel>> Details(int id)
