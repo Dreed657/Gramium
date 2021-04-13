@@ -1,7 +1,7 @@
 <div class="comment">
     <h4>
         <a [routerLink]="['/profile/', comment.userName]">{{comment.userName}}</a> | 
-        {{comment.createdAt | timeDiffToString }}
+        {{comment.createdAt | timeAgo }}
     </h4>
     <p>{{comment.content}}</p>
     <hr class="w-75">
